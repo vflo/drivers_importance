@@ -8,3 +8,4 @@
 *.csv
 plots/
 data/
+.Rproj.user

@@ -1,12 +1,41 @@
 ---
-title: "Vapour pressure deficit is the main driver of tree canopy conductance across biomes"
-date: 2021
 output: pdf_document
+header-includes:
+- \newcommand{\bcenter}{\begin{center}}
+- \newcommand{\ecenter}{\end{center}}
 ---
 
 \renewcommand{\thefigure}{S\arabic{figure}} \setcounter{figure}{0}
 \renewcommand{\thetable}{S\arabic{table}} \setcounter{table}{0}
 \renewcommand{\theequation}{S\arabic{table}} \setcounter{equation}{0}
+
+\normalsize
+\bcenter
+
+![](~/Drivers_importance/plots/AGU_image.png)
+
+
+*Global Biogeochemical Cycles*\par
+\par
+Supporting Information for\par
+\par
+**Vapour pressure deficit is the main driver of tree canopy conductance across biomes**\par\par
+
+Víctor Flo$^{1}$, Jordi Martínez-Vilalta$^{1,2}$, Víctor Granda$^{1}$, Maurizio Mencuccini$^{1,3}$, Rafael Poyatos$^{1,2}$\par
+\footnotesize
+$^{1}$CREAF, E08193 Bellaterra (Cerdanyola del Vallès), Catalonia, Spain\par
+$^{2}$Univ Autònoma de Barcelona, Cerdanyola del Vallès 08193, Spain\par
+$^{3}$ICREA, Barcelona 08010, Spain\par
+\par
+\normalsize
+\ecenter
+\par
+\par
+**Contents of this file** \par
+
+Figures S1 to S8\par
+Tables S1 to S4 \par
+\par
 
 \setlength{\abovecaptionskip}{15pt}
 ```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Shaded areas are 95\\% model confidence interval.",fig.cap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Basal area and sapwood area are both in $\\text{cm}^2$. Shaded areas are 95\\% model confidence interval."}
