@@ -6,4 +6,6 @@ In this repository you can find the code necessary for the generation of the res
 
 To generate all the tables and figures of the study you should use the script code 'Analyses_4.0.R'. The data can be found in the following repository: https://doi.org/10.5281/zenodo.5517725
 
+The rest of the scripts are functions or code necessary to obtain the datasets.
+
 Code author: Víctor Flo
