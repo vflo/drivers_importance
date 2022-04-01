@@ -1,5 +1,5 @@
 #### ASSEMBLAGE OF FUNCTIONS FOR PLOTTING MAPS FOR HYDROMETEOROLOGICAL MODELS
-
+sf_use_s2(FALSE)
 datamapcal <- function(data_stack, model_bio,st_height){
   faa <- raster::predict(data_stack, model_bio)
   faa[is.infinite(faa)]<- NA
@@ -26,7 +26,7 @@ maps_plot <- function(datamap = datamap, title = title){
     geom_tile(data=datamap, aes(x=x, y=y, fill=value)) +
     labs(title = bquote(~R[.(title)]^2))+
     scale_fill_gradientn(name=expression(~R^2),
-                         na.value = "transparent", colours=rev(brewer.pal(9, 'Spectral')),
+                         na.value = "transparent", colours=rev(brewer.pal(9, 'YlGnBu')),
                          breaks = c(0,25,50,75,100),
                          labels = c("0%","25%","50%","75%","100%"),
                          limits = c(0,100)
@@ -93,17 +93,11 @@ maps_plot_var <- function(datamap = datamap, title = title){
     geom_sf(colour="gray70", fill="gray70",size = 0.1)+
     geom_tile(data=datamap, aes(x=x, y=y, fill=value)) +
     labs(title = bquote(.(title)))+
-    scale_fill_gradientn(na.value = "transparent", colours=brewer.pal(9, 'Spectral'))+
-    theme(plot.margin = unit(c(0, 0, 0, 0), "cm"),
-          legend.justification=c(0,1), 
-          legend.position=c(0.03, 0.70),
-          legend.background = element_blank(),
-          legend.key.size = unit(0.28, "cm"),
-          legend.key.width = unit(0.28,"cm"),
-          legend.key = element_blank(),
-          legend.title = element_blank())+
+    scale_fill_gradientn(na.value = "transparent", colours=rev(brewer.pal(9, 'YlGnBu'))
+    )+
+    theme(legend.position = "none",plot.margin = unit(c(0, 0, 0, 0), "cm"))+
     xlab("Lon") + ylab("Lat") + 
-    coord_sf(crs = 4326, xlim=c(-180, 180), ylim=c(-60,80),expand=FALSE)+
+    coord_sf(crs = 4326, xlim=c(-180, 180), ylim=c(-60,85),expand=FALSE)+
     NULL
 }
 
@@ -171,7 +165,6 @@ gd_get_biomes_spdf_var <- function (merge_biomes = FALSE)
                    `Temperate grassland/desert` = 'DRY',
                    `Subtropical desert` = 'DRY')
     biomes_df$biome <- as.factor(biome)
-
   }
   list_pol <- sapply(as.character(unique(biomes_df$biome)), 
                      function(id_biome, df) sp::Polygon(cbind(df$map[df$biome == id_biome], 
@@ -197,7 +190,7 @@ biome_plot <- function (merge_biomes = FALSE)
   }
   suppressMessages(biomes_df <- ggplot2::fortify(gd_get_biomes_spdf_var(merge_biomes = merge_biomes)))
   if (merge_biomes) {
-    pal <- c("#377EB8","#E41A1C", "#4DAF4A", "#984EA3", "#FF7F00")
+    pal <- viridis::viridis(9)[c(2, 9, 4, 7, 8, 6, 1, 3)]
   }
   else {
     pal <- viridis::viridis(9)[c(2, 5, 4, 9, 7, 8, 6, 1, 
@@ -207,7 +200,9 @@ biome_plot <- function (merge_biomes = FALSE)
   plot <- ggplot2::ggplot() + 
     ggplot2::geom_polygon(data = biomes_df, 
                           ggplot2::aes_(x = ~long, y = ~lat, group = ~id, fill = ~id)) + 
-    ggplot2::scale_fill_manual("Biomes", values = pal) + 
+    # ggplot2::scale_fill_manual("Biomes", values = pal) + 
+    scale_fill_manual("Biome",
+                      values = c("#377EB8","#E41A1C", "#4DAF4A", "#984EA3", "#FF7F00"))+
     ggplot2::xlab("Mean annual precipitation (mm)") + 
     ggplot2::ylab(expression(paste("Mean annual temperature ", (degree * C))))
   return(plot)

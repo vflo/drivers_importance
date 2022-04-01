@@ -49,10 +49,125 @@ custom_palette <- c("#e6545d", "#f49f27", "#ACE4AA", "#2b99ca", "#40596f")
 
 #### DATA ####
 
-# COMPLETE G_log sample MODELS DATA
+# COMPLETE G_log MODELS DATA
 # path <- "data/models/complete_G_log/"
 # site_names <- list.files(path = path)
 # models <- purrr::map(site_names,function(x){
+#   load(paste0(path,x))
+#   print(x)
+#   model_env <- model[[2]]
+#   model_type <- model[[1]]$model_type_complete
+#   faa <- model[[3]]
+#   n <- model[[1]]$n_days_complete %>% unique()
+#   
+#       df <- tibble(n_days_complete = n,
+#                r2_G_log = model[[1]]$r2_G_log,
+#                r2_G_log_vpd = model[[1]]$r2_G_log_vpd,
+#                r2_G_log_swc = model[[1]]$r2_G_log_swc,
+#                r2_G_log_ppfd = model[[1]]$r2_G_log_ppfd,
+#                G_log_mar = model[[1]]$r2_G_log_mar,
+#                G_log_vpd_mar = model[[1]]$r2_G_log_vpd_mar,
+#                G_log_swc_mar = model[[1]]$r2_G_log_swc_mar,
+#                G_log_ppfd_mar = model[[1]]$r2_G_log_ppfd_mar,
+#                model_type_complete = model_type,
+#                vpd_rel = model[[1]]$vpd_rel,
+#                swc_rel = model[[1]]$swc_rel,
+#                ppfd_rel = model[[1]]$ppfd_rel,
+#                G_mean = mean(faa$G_sw,na.rm = TRUE),
+#                G_sd = sd(faa$G_sw,na.rm = TRUE),
+#                G_cv = G_sd/G_mean) %>%
+#     cbind(model_env %>% dplyr::select(-MAT,-MAP)
+#           )
+#   return(df)
+# }) %>% bind_rows()
+# save(models,file = "data/complete_G_log_results.RData")
+load("data/complete_G_log_results.RData")
+
+# COMPLETE G_log MODELS DATA
+# path <- "data/models/complete_G_log/"
+# site_names <- list.files(path = path)
+# models_ta <- purrr::map(site_names,function(x){
+#   load(paste0(path,x))
+#   print(x)
+#   model_env <- model[[2]]
+#   model_type <- model[[1]]$model_type_complete
+#   faa <- model[[3]]
+#   n <- model[[1]]$n_days_complete %>% unique()
+#   
+#   df <- tibble(n_days_complete = n,
+#                r2_G_log = model[[1]]$r2_G_log,
+#                r2_G_log_vpd = model[[1]]$r2_G_log_vpd,
+#                r2_G_log_swc = model[[1]]$r2_G_log_swc,
+#                r2_G_log_ppfd = model[[1]]$r2_G_log_ppfd,
+#                r2_G_log_ta = model[[1]]$r2_G_log_ta,
+#                model_type_complete = model_type,
+#                vpd_rel = model[[1]]$vpd_rel,
+#                swc_rel = model[[1]]$swc_rel,
+#                ppfd_rel = model[[1]]$ppfd_rel) %>%
+#     cbind(model_env %>% dplyr::select(-MAT,-MAP)
+#     )
+#   return(df)
+# }) %>% bind_rows()
+# save(models_ta,file = "data/complete_G_log_ta_results.RData")
+load("data/complete_G_log_ta_results.RData")
+
+# COMPLETE G_log MODELS DATA TREE
+# path <- "data/models/complete_G_log_tree/"
+# site_names <- list.files(path = path)
+# models_tree <- purrr::map(site_names,function(x){
+#   load(paste0(path,x))
+#   print(x)
+#   model_env <- model[[2]]
+#   faa <- model[[3]]
+#   model <- model[[1]] %>% 
+#     dplyr::select(-pl_code) %>% 
+#     group_by(si_code) %>% 
+#     summarise_all(mean, na.rm = TRUE)
+# 
+#       df <- model %>%
+#     cbind(model_env %>% dplyr::select(-si_code,-MAT,-MAP)
+#           )
+#       
+#   return(df)
+# }) %>% bind_rows()
+# save(models_tree,file = "data/complete_G_log_results_tree.RData")
+# load("data/complete_G_log_results_tree.RData")
+
+# COMPLETE G_log MODELS DATA TREE MIXED MODEL
+# path <- "data/models/complete_G_log_tree_mixedmodel/"
+# site_names <- list.files(path = path)
+# models_tree <- purrr::map(site_names,function(x){
+#    load(paste0(path,x))
+#    print(x)
+#    model_env <- model[[2]]
+#    model_type <- model[[1]]$model_type_complete
+#    faa <- model[[3]]
+#    n <- model[[1]]$n_days_complete %>% unique()
+# 
+#       df <- tibble(n_days_complete = n,
+#                r2_G_log = model[[1]]$r2_G_log,
+#                r2_G_log_vpd = model[[1]]$r2_G_log_vpd,
+#                r2_G_log_swc = model[[1]]$r2_G_log_swc,
+#                r2_G_log_ppfd = model[[1]]$r2_G_log_ppfd,
+#                G_log_mar = model[[1]]$r2_G_log_mar,
+#                G_log_vpd_mar = model[[1]]$r2_G_log_vpd_mar,
+#                G_log_swc_mar = model[[1]]$r2_G_log_swc_mar,
+#                G_log_ppfd_mar = model[[1]]$r2_G_log_ppfd_mar,
+#                vpd_rel = model[[1]]$vpd_rel,
+#                swc_rel = model[[1]]$swc_rel,
+#                ppfd_rel = model[[1]]$ppfd_rel) %>%
+#     cbind(model_env %>% dplyr::select(-MAT,-MAP)
+#           )
+#   return(df)
+# }) %>% bind_rows()
+# save(models_tree,file = "data/complete_G_log_results_tree_mixedmodel.RData")
+load("data/complete_G_log_results_tree_mixedmodel.RData")
+
+
+# COMPLETE G_log weekly MODELS DATA
+# path <- "data/models/complete_G_log_weekly/"
+# site_names <- list.files(path = path)
+# models_weekly <- purrr::map(site_names,function(x){
 #   load(paste0(path,x))
 #   print(x)
 #   model_env <- model[[2]]
@@ -73,8 +188,35 @@ custom_palette <- c("#e6545d", "#f49f27", "#ACE4AA", "#2b99ca", "#40596f")
 #           )
 #   return(df)
 # }) %>% bind_rows()
-# save(models,file = "data/complete_G_log_results.RData")
-load("data/complete_G_log_results.RData")
+# save(models_weekly,file = "data/complete_G_log_results_weekly.RData")
+load("data/complete_G_log_results_weekly.RData")
+
+# COMPLETE G_log SAPFLUXNET swc MODELS DATA
+# path <- "data/models/complete_G_log_swc/"
+# site_names <- list.files(path = path)
+# models_swc <- purrr::map(site_names,function(x){
+#   load(paste0(path,x))
+#   print(x)
+#   model_env <- model[[2]]
+#   model_type <- model[[1]]$model_type_complete
+#   faa <- model[[3]]
+#   n <- model[[1]]$n_days_complete %>% unique()
+# 
+#       df <- tibble(n_days_complete = n,
+#                r2_G_log = model[[1]]$r2_G_log,
+#                r2_G_log_vpd = model[[1]]$r2_G_log_vpd,
+#                r2_G_log_swc = model[[1]]$r2_G_log_swc,
+#                r2_G_log_ppfd = model[[1]]$r2_G_log_ppfd,
+#                model_type_complete = model_type,
+#                vpd_rel = model[[1]]$vpd_rel,
+#                swc_rel = model[[1]]$swc_rel,
+#                ppfd_rel = model[[1]]$ppfd_rel) %>%
+#     cbind(model_env %>% dplyr::select(-MAT,-MAP)
+#           )
+#   return(df)
+# }) %>% bind_rows()
+# save(models_swc,file = "data/complete_G_log_results_swc.RData")
+load("data/complete_G_log_results_swc.RData")
 
 
 # COMPLETE G_log sample MODELS DATA
@@ -273,7 +415,10 @@ load("data/PET.RData")
 data <- models %>%
   left_join(models_bin[,c(1:10)], suffix = c("","_bin"), by="si_code")%>%
   left_join(models_sample[,c(1:10)], suffix = c("","_sample"), by="si_code")%>%
-  left_join(model_gam, suffix = c("","_gam"), by="si_code") %>% 
+  left_join(model_gam, suffix = c("","_gam"), by="si_code") %>%
+  left_join(models_weekly, suffix = c("","_weekly"), by="si_code") %>% 
+  left_join(models_swc, suffix = c("","_swcsfn"), by="si_code") %>% 
+  left_join(models_tree, suffix = c("","_tree"), by="si_code") %>% 
   dplyr::select(-PET,-PPET) %>% 
   right_join(BIOS, by=c('si_code'))%>%
   # left_join(complete_gam %>% dplyr::select(-model_type_complete), by = "si_code") %>% 
@@ -305,9 +450,9 @@ data <- models %>%
          lai = coalesce(st_lai,LAI_google),
          LAI = coalesce(lai,LAI)) %>% 
   filter(!is.na(r2_G_log))
-         # MAT_bios = MAT_bios/10,
-         # MAP = coalesce(MAP,MAP_bios),
-         # MAT = coalesce(MAT,MAT_bios))
+# MAT_bios = MAT_bios/10,
+# MAP = coalesce(MAP,MAP_bios),
+# MAT = coalesce(MAT,MAT_bios))
 
 # data %>% split(.[['si_code']],drop = FALSE) %>%
 #   purrr::map(function(x){
@@ -327,6 +472,12 @@ data_plant <- data %>%
                            `bor` = "BOR",
                            `tro` = "TROP",
                            `dry` = 'DRY'),
+         si_biome = factor(si_biome,
+                           levels = c("DRY",
+                                      "WOOD",
+                                      "TEMP",
+                                      "BOR",
+                                      "TROP")),
          bedrock_cat = case_when(bedrock>=200~'deep',
                                  bedrock<200&bedrock>100~'medium',
                                  bedrock<=100~"shallow")
@@ -344,25 +495,28 @@ data_plant <- data %>%
          #                   `Temperate grassland desert` = 'DRY',
          #                   `Subtropical desert` = 'DRY',
          #                   `Desert` = 'DRY')
-         )
+  )
 
-data_plant$si_biome <- factor(data_plant$si_biome, 
-                       levels = c("DRY", 
-                                  "WOOD", 
-                                  "TEMP",
-                                  "BOR",
-                                  "TROP"))
+data_plant %>% 
+  dplyr::select(starts_with("r2_"),si_code,si_biome,n_days_complete)%>% 
+  pivot_longer(cols=starts_with("r2_")) %>% 
+  cbind(type = c("COMPLETE","VPD","SWC","PPFD"),
+        MODELS = c(rep("all data",4),
+                   rep("binning",4),
+                   rep("samples",4),
+                   rep("gam",4),
+                   rep("weekly",4),
+                   rep("swcsfn",4),
+                   rep('tree',4)
+        )
+  ) -> foo3
+
 
 
 gA <- biome_plot(merge_biomes = TRUE)+
   geom_point(data=data_plant,aes(x=MAP,y=MAT),fill="white",shape=21)+
   scale_fill_manual(name = 'BIOME',
-                    values = c("#2b99ca",
-                               "#e6545d",
-                               "#ACE4AA",
-                               "#40596f",
-                               "#f49f27"
-                               ))
+                    values = custom_palette)
 gg_biomes <- plot_grid(gA,ncol = 1)
 
 pdf(file ="plots/gg_biomes.pdf",width=6,height=5)
@@ -377,37 +531,40 @@ dev.off()
 # pdf(file ="gg_biomes.pdf",width=11,height=3)
 # gg_biomes
 # dev.off()
+#### Biomes G mean and CV ####
+G_mean_biomes <- data_plant %>%
+  group_by(si_biome) %>% 
+  summarise(G_mean = weighted.mean(G_mean,n_days_complete, na.rm = TRUE),
+            G_sd = weighted.mean(G_sd,n_days_complete, na.rm = TRUE),
+            G_cv = G_sd/G_mean)
+
+write_csv(G_mean_biomes,file = "G_mean_biomes.csv")
 
 
-## models comparative
-data_plant %>% 
-  dplyr::select(starts_with("r2_"),si_code,si_biome)%>% 
-  pivot_longer(cols=starts_with("r2_")) %>% 
-  cbind(type = c("FULL","VPD","SWC","PPFD"),
-        MODELS = c(rep("all data",4),
-                  rep("binning",4),
-                  rep("samples",4),
-                  rep("gam",4))
-        ) ->foo
+#### models comparative ####
+foo3 %>% 
+  filter(MODELS != 'swc', MODELS != 'tree') %>% 
+  mutate(type = fct_recode( type, FULL = "COMPLETE"))->foo
 
 foo$MODELS <- factor(foo$MODELS, 
-                    levels = c("all data", 
-                               "gam", 
-                               "binning",
-                               "samples"))
+                     levels = c("all data", 
+                                "gam", 
+                                "binning",
+                                "samples",
+                                "weekly"))
 
 foo$type <- factor(foo$type, 
-                    levels = c("FULL", 
-                               "VPD", 
-                               "SWC",
-                               "PPFD"))
+                   levels = c("FULL", 
+                              "VPD", 
+                              "SWC",
+                              "PPFD"))
 
 foo$si_biome <- factor(foo$si_biome, 
-                    levels = c("DRY", 
-                               "WOOD", 
-                               "TEMP",
-                               "BOR",
-                               "TROP"))
+                       levels = c("DRY", 
+                                  "WOOD", 
+                                  "TEMP",
+                                  "BOR",
+                                  "TROP"))
 
 library(ggpubr)
 library(rstatix)
@@ -417,26 +574,38 @@ stat.test <- foo %>%
   t_test(value ~ MODELS)
 stat.test
 stat.test <- stat.test %>%
-  add_xy_position(x = "si_biome", dodge = 0.7)
+  add_xy_position(x = "si_biome", dodge = 0.7) %>% 
+  mutate(y.position = y.position ^ 0.6-0.2)
 
-comparation <- foo %>% 
+foo_error <- foo %>% 
+  group_by(si_biome,type,MODELS) %>% 
+  summarise(se = 2*sd(value, na.rm= TRUE),
+            value = mean(value, na.rm = TRUE)) %>% 
+  mutate(se = case_when(is.na(se)~0,
+                        !is.na(se)~se))
+
+comparation <- foo %>% filter(!is.na(value)) %>% 
   ggplot(aes(y=value, x = si_biome,color = MODELS))+
   stat_summary(aes(y=value, x = si_biome,color = MODELS),
                geom = "point", fun = mean, 
                position = position_dodge(width = 0.7),
                size = 2.5) +
-  stat_summary(geom = "errorbar", fun.data = mean_sdl, 
-               position = position_dodge(width = 0.7),
-               width=0.6)+
-  # stat_pvalue_manual(
-  #   stat.test, label = "p.adj.signif", tip.length = 0.01,
-  #   bracket.nudge.y = 0.2
-  # )+
+  # stat_summary(geom = "errorbar", fun.data = mean_sdl, 
+  #              position = position_dodge(width = 0.7),
+  #              width=0.6)+
+  stat_pvalue_manual(
+    stat.test, label = "p.adj.signif", tip.length = 0.01,
+    bracket.nudge.y = 0.05, hide.ns = TRUE
+  )+
+  geom_errorbar(data = foo_error, 
+                mapping = aes(ymin=(value - se), ymax = (value+se), x = si_biome, color = MODELS),
+                position = position_dodge(width = 0.7),width=0.6)+
   # geom_boxplot()+
   facet_wrap(~type)+
   ylab(expression(~R^2))+
   xlab("BIOME")+
   scale_color_grey(start = 0, end = 0.8)+
+  theme_bw()+
   # viridis::scale_color_viridis(option="C",discrete=TRUE)+
   theme(legend.background = element_blank(),
         panel.grid.major = element_blank(),
@@ -453,8 +622,243 @@ pdf(file ="plots/comparative.pdf",width=10,height=6.5)
 comparation
 dev.off()
 
+#### Comparative site level tree level ####
 
-###DBH sapwood relationship
+foo3 %>% 
+  dplyr::select(-name) %>% 
+  filter(MODELS == 'all data'| MODELS == "tree") %>%
+  mutate(type = fct_recode(type, "FULL" = "COMPLETE")) %>% 
+  pivot_wider(names_from = MODELS, values_from = value) %>%
+  mutate(si_biome = factor(si_biome,
+                           levels = c("DRY",
+                                      "WOOD",
+                                      "TEMP",
+                                      "BOR",
+                                      "TROP")),
+         type = factor(type,
+                       levels = c("FULL", 
+                                  "VPD",
+                                  "SWC",
+                                  "PPFD")))->foo4
+
+fit_complete <- lm(tree ~ `all data`*si_biome,data=foo4 %>% filter(type == 'FULL'))
+summary(fit_complete)
+emmeans::test(fit_complete %>% emmeans::emtrends('si_biome',"all data"),1)
+
+fit_VPD <- lm(tree ~ `all data`*si_biome,data=foo4 %>% filter(type == 'VPD'))
+summary(fit_VPD)
+emmeans::test(fit_VPD %>% emmeans::emtrends('si_biome',"all data"),1)
+
+fit_SWC <- lm(tree ~ `all data`*si_biome,data=foo4 %>% filter(type == 'SWC'))
+summary(fit_SWC)
+emmeans::test(fit_SWC %>% emmeans::emtrends('si_biome',"all data"),1)
+
+fit_PPFD <- lm(tree ~ `all data`*si_biome,data=foo4 %>% filter(type == 'PPFD'))
+summary(fit_PPFD)
+emmeans::test(fit_PPFD %>% emmeans::emtrends('si_biome',"all data"),1)
+
+foo4%>% 
+  ggplot(aes(`all data`,tree, color = si_biome, group=si_biome))+
+  geom_point(size = 3)+
+  geom_abline(slope = 1, intercept=0)+
+  geom_smooth(aes(linetype = interaction(si_biome,type) ),
+              method = "lm", se = FALSE, show.legend = FALSE)+
+  scale_color_manual(values=custom_palette)+
+  # annotate("text", x = 0.12, y = 0.48,
+  #          label = '"**"', parse = TRUE, size = 8)+
+  # annotate("text", x = 0.9, y = 0.73,
+  #          label = '"."', parse = TRUE, size = 12)+
+  facet_wrap(~type)+
+  labs(color = "Biome")+
+  scale_linetype_manual(values =c(2,1,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2))+
+  xlab(expression(paste(~R^2,"")))+
+  ylab(expression(paste(~R^2," simplified random structure")))+
+  theme(legend.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=12),
+        axis.text = element_text(size=12),
+        axis.ticks.x = element_blank(),
+        strip.text = element_text(size=12),
+        strip.background = element_rect(colour="transparent",
+                                        fill ="transparent")) -> comparation_site_tree
+
+pdf(file ="plots/comparative_site_tree.pdf",width=8,height=5)
+comparation_site_tree
+dev.off()
+
+#### Comparative site level marginal vs tree level ####
+
+data_plant %>% 
+  dplyr::select(G_log_mar,G_log_vpd_mar,G_log_swc_mar,G_log_ppfd_mar,
+                r2_G_log_tree,r2_G_log_vpd_tree,r2_G_log_swc_tree,
+                r2_G_log_ppfd_tree,si_code,si_biome,n_days_complete)%>% 
+  pivot_longer(cols=c(1:8)) %>% 
+  cbind(type = c("FULL","VPD","SWC","PPFD"),
+        MODELS = c(rep("marginal",4),
+                   rep('tree',4)
+        )
+  ) -> foo8
+
+
+foo8 %>% 
+  dplyr::select(-name) %>% 
+  pivot_wider(names_from = MODELS, values_from = value) %>%
+  mutate(si_biome = factor(si_biome,
+                           levels = c("DRY",
+                                      "WOOD",
+                                      "TEMP",
+                                      "BOR",
+                                      "TROP")),
+         type = factor(type,
+                       levels = c("FULL", 
+                                  "VPD",
+                                  "SWC",
+                                  "PPFD")))->foo9
+
+fit_complete <- lm(tree ~ marginal*si_biome,data=foo9 %>% filter(type == 'FULL'))
+summary(fit_complete)
+emmeans::test(fit_complete %>% emmeans::emtrends('si_biome',"marginal"),1)
+
+fit_VPD <- lm(tree ~ marginal*si_biome,data=foo9 %>% filter(type == 'VPD'))
+summary(fit_VPD)
+emmeans::test(fit_VPD %>% emmeans::emtrends('si_biome',"marginal"),1)
+
+fit_SWC <- lm(tree ~ marginal*si_biome,data=foo9 %>% filter(type == 'SWC'))
+summary(fit_SWC)
+emmeans::test(fit_SWC %>% emmeans::emtrends('si_biome',"marginal"),1)
+
+fit_PPFD <- lm(tree ~ marginal*si_biome,data=foo9 %>% filter(type == 'PPFD'))
+summary(fit_PPFD)
+emmeans::test(fit_PPFD %>% emmeans::emtrends('si_biome',"marginal"),1)
+
+foo9%>% 
+  ggplot(aes(marginal,tree, color = si_biome, group=si_biome))+
+  geom_point(size = 3)+
+  geom_abline(slope = 1, intercept=0)+
+  geom_smooth(aes(linetype = interaction(si_biome,type) ),
+              method = "lm", se = FALSE, show.legend = FALSE)+
+  scale_color_manual(values=custom_palette)+
+  # annotate("text", x = 0.12, y = 0.48,
+  #          label = '"**"', parse = TRUE, size = 8)+
+  # annotate("text", x = 0.9, y = 0.73,
+  #          label = '"."', parse = TRUE, size = 12)+
+  facet_wrap(~type)+
+  labs(color = "Biome")+
+  scale_linetype_manual(values =c(2,1,2,2,2,2,2,2,2,2,2,2,1,2,1,2,1,2,2,1))+
+  ylab(expression(paste(~R[SWC]^2," tree level")))+
+  xlab(expression(paste(~R[SWC]^2," site level")))+
+  theme(legend.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=12),
+        axis.text = element_text(size=12),
+        axis.ticks.x = element_blank(),
+        strip.text = element_text(size=12),
+        strip.background = element_rect(colour="transparent",
+                                        fill ="transparent")) -> comparation_site_tree
+
+# pdf(file ="plots/comparative_site_tree.pdf",width=8,height=5)
+# comparation_site_tree
+# dev.off()
+
+
+#### Comparative ERA5 swc ####
+
+foo3 %>% 
+  dplyr::select(-name) %>% 
+  pivot_wider(names_from = MODELS, values_from = value) %>%
+  mutate(si_biome = factor(.$si_biome,
+                           levels = c("DRY",
+                                      "WOOD",
+                                      "TEMP",
+                                      "BOR",
+                                      "TROP"))) %>% 
+  filter(type == 'SWC')->foo4
+
+fit <- lm(swc ~ `all data`*si_biome,data=foo4,weight = n_days_complete)
+summary(fit)
+emmeans::test(fit %>% emmeans::emtrends('si_biome',"all data"),1)
+
+
+foo4%>% 
+  ggplot(aes(`all data`,swc, color = si_biome, group=si_biome))+
+  geom_point(size = 3)+
+  geom_abline(slope = 1, intercept=0)+
+  geom_smooth(#aes(linetype = si_biome ),
+    method = "lm", se = FALSE, show.legend = FALSE)+
+  scale_color_manual(values=custom_palette)+
+  annotate("text", x = 0.14, y = 0.48,
+           label = '"**"', parse = TRUE, size = 6)+
+  # annotate("text", x = 0.9, y = 0.73,
+  #          label = '"."', parse = TRUE, size = 12)+
+  # scale_linetype_manual(values =c(1,4,4,4,2))+
+  labs(color = "Biome")+
+  ylab(expression(paste(~R[SWC]^2," SAPFLUXNET")))+
+  xlab(expression(paste(~R[SWC]^2," ERA5")))+
+  theme_bw() -> comparation_ERA5_swc
+
+foo4%>% 
+  mutate(swc_era5 = swc - `all data`) -> foo5
+
+fit <- lm(swc ~ si_biome, data=foo5, weights = n_days_complete)
+summary(fit)
+anova(fit)
+multcomp::cld(fit %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_sfn_alone
+
+
+foo5%>% 
+  ggplot(aes(y = (swc), x = si_biome, color = si_biome, group=si_biome))+
+  geom_boxplot(show.legend = FALSE)+
+  annotate("text", x = c(1,2,3,4,5), y = 0.9,
+           label = c('A',"A","A","A", "A"), parse = TRUE, size = 4)+
+  scale_color_manual(values=custom_palette)+
+  ylab(expression(paste(~R[SWC]^2," SAPFLUXNET")))+
+  xlab("BIOME")+
+  theme_bw() -> comparation_swc_box
+
+fit <- lm(swc_era5 ~ si_biome, data=foo5, weights = n_days_complete)
+summary(fit)
+emmeans::test(fit %>% emmeans::emmeans('si_biome'),0)
+multcomp::cld(fit %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_era5
+
+
+foo5%>% 
+  ggplot(aes(y = (swc_era5), x = si_biome, color = si_biome, group=si_biome))+
+  geom_boxplot(show.legend = FALSE)+
+  geom_abline(intercept = 0, slope = 0)+
+  scale_color_manual(values=custom_palette)+
+  annotate("text", x = 1, y = -0.15,
+           label = '"**"', parse = TRUE, size = 6)+
+  annotate("text", x = c(1,2,3,4,5), y = 0.5,
+           label = c('B',"A","A","AB", "AB"), parse = TRUE, size = 4)+
+  # scale_linetype_manual(values =c(1,4,4,4,2))+
+  # labs(color = "BIOME")+
+  ylab(expression(paste(~R[SWC]^2," SAPFLUXNET - " ~R[SWC]^2," ERA5")))+
+  xlab("BIOME")+
+  theme_bw() -> comparation_ERA5_swc_box
+
+prow <- plot_grid(
+  comparation_ERA5_swc + theme(legend.position="none"),
+  comparation_swc_box,
+  comparation_ERA5_swc_box,
+  align = 'vh',
+  labels = c("A", "B", "C"),
+  hjust = -1,
+  nrow = 1
+)
+prow
+
+pdf(file ="plots/comparative_ERA5_swc.pdf",width=12,height=3.5)
+prow
+dev.off()
+
+
+####DBH sapwood relationship####
 library(ggpmisc)
 source('color_branded.R')
 dbh_sapw_mod <- readRDS(file="dbh_sapw_area_model.rds")
@@ -479,207 +883,8 @@ pdf(file ="plots/dbh_sw.pdf",width=6,height=4)
 dbh_sw
 dev.off()
 
-
-
 path <- "data/models/complete_G_log/"
 site_names <- list.files(path = path)
-
-
-
-
-#### Co-variation plots ####
-library(ggpmisc)
-library(ggpubr)
-library(gtable)
-library(cowplot)
-library(gridExtra)
-library(lemon)
-library(patchwork)
-library(egg)
-library(grid)
-
-shift_legend <- function(p){
-  
-  # check if p is a valid object
-  if(!"gtable" %in% class(p)){
-    if("ggplot" %in% class(p)){
-      gp <- ggplotGrob(p) # convert to grob
-    } else {
-      message("This is neither a ggplot object nor a grob generated from ggplotGrob. Returning original plot.")
-      return(p)
-    }
-  } else {
-    gp <- p
-  }
-  
-  # check for unfilled facet panels
-  facet.panels <- grep("^panel", gp[["layout"]][["name"]])
-  empty.facet.panels <- sapply(facet.panels, function(i) "zeroGrob" %in% class(gp[["grobs"]][[i]]))
-  empty.facet.panels <- facet.panels[empty.facet.panels]
-  if(length(empty.facet.panels) == 0){
-    message("There are no unfilled facet panels to shift legend into. Returning original plot.")
-    return(p)
-  }
-  
-  # establish extent of unfilled facet panels (including any axis cells in between)
-  empty.facet.panels <- gp[["layout"]][empty.facet.panels, ]
-  empty.facet.panels <- list(min(empty.facet.panels[["t"]]), min(empty.facet.panels[["l"]]),
-                             max(empty.facet.panels[["b"]]), max(empty.facet.panels[["r"]]))
-  names(empty.facet.panels) <- c("t", "l", "b", "r")
-  
-  # extract legend & copy over to location of unfilled facet panels
-  guide.grob <- which(gp[["layout"]][["name"]] == "guide-box")
-  if(length(guide.grob) == 0){
-    message("There is no legend present. Returning original plot.")
-    return(p)
-  }
-  gp <- gtable_add_grob(x = gp,
-                        grobs = gp[["grobs"]][[guide.grob]],
-                        t = empty.facet.panels[["t"]],
-                        l = empty.facet.panels[["l"]],
-                        b = empty.facet.panels[["b"]],
-                        r = empty.facet.panels[["r"]],
-                        name = "new-guide-box")
-  
-  # squash the original guide box's row / column (whichever applicable)
-  # & empty its cell
-  guide.grob <- gp[["layout"]][guide.grob, ]
-  if(guide.grob[["l"]] == guide.grob[["r"]]){
-    gp <- gtable_squash_cols(gp, cols = guide.grob[["l"]])
-  }
-  if(guide.grob[["t"]] == guide.grob[["b"]]){
-    gp <- gtable_squash_rows(gp, rows = guide.grob[["t"]])
-  }
-  gp <- gtable_remove_grobs(gp, "guide-box")
-  
-  return(gp)
-}
-
-
-
-path <- "data/models/complete_G_log/"
-site_names <- list.files(path = path)
-covar_data <-purrr::map(site_names,function(x){
-  load(paste0(path,x))
-  print(x)
-  df <- model[[3]] %>% 
-    dplyr::select(log_vpd_mean, 
-                  log_swc, 
-                  log_ppfd, 
-                  # pl_code, 
-                  # pl_species, 
-                  si_biome,
-                  si_code) 
-  return(df)
-}) %>% 
-  bind_rows()%>% 
-  ungroup()
-
-covar_data %>% 
-  mutate(si_biome = recode(si_biome,
-                           `Woodland/shrubland` = 'WOOD',
-                           `Woodland/Shrubland` = 'WOOD',
-                           `Temperate forest` = "TEMP",
-                           `Boreal forest` = "BOR",
-                           `Tundra` = "BOR",
-                           `Tropical seasonal forest/savanna` = "TROP",
-                           `Tropical rain forest` = 'TROP',
-                           `Tropical forest savanna` = 'TROP',
-                           `Temperate grassland/desert` = 'DRY',
-                           `Temperate grassland desert` = 'DRY',
-                           `Subtropical desert` = 'DRY',
-                           `Desert` = 'DRY')) %>% 
-  distinct() -> covar_data_unique
-
-covar_data_unique$si_biome <- factor(covar_data_unique$si_biome, 
-                              levels = c("DRY", 
-                                         "WOOD", 
-                                         "TEMP",
-                                         "BOR",
-                                         "TROP"))
-
-my.formula <- y ~ x
-covar_data_unique %>% 
-  ggplot(aes(x=log_vpd_mean,y=log_swc, color = si_biome))+
-  geom_point(shape=21)+
-  geom_smooth(method = "lm", color = "grey10")+
-  stat_cor(method = "pearson", aes(label = ..r.label..),
-           label.x = -2, label.y = -2.5, color = "grey10")+
-  scale_color_manual(values = custom_palette)+
-  xlab("ln(VPD)")+
-  ylab("ln(SWC)")+
-  theme(legend.direction = "horizontal",
-        legend.background = element_rect(fill="transparent",colour=NA),
-        legend.title = element_blank(),
-        strip.background = element_rect(fill="transparent",colour=NA))+
-  facet_wrap(~si_code)+
-  guides(fill = guide_legend(title.position = "top",
-                             label.position = "bottom",
-                             nrow = 1)) -> vpd_swc
-
-plot_grid(shift_legend(vpd_swc)) -> vpd_swc
-
-grid.newpage()
-dim(vpd_swc)
-pdf(file ="plots/vpd_swc_cor.pdf",width=16,height=9)
-vpd_swc
-dev.off()
-
-
-covar_data_unique %>% 
-  ggplot(aes(x=log_vpd_mean,y=log_ppfd, color = si_biome))+
-  geom_point(shape=21)+
-  geom_smooth(method = "lm", color = "grey10")+
-  stat_cor(method = "pearson", aes(label = ..r.label..),
-           label.x = -2, label.y = -2.5, color = "grey10")+
-  scale_color_manual(values = custom_palette)+
-  xlab("ln(VPD)")+
-  ylab("ln(PPFD)")+
-  theme(legend.direction = "horizontal",
-        legend.background = element_rect(fill="transparent",colour=NA),
-        legend.title = element_blank(),
-        strip.background = element_rect(fill="transparent",colour=NA))+
-  facet_wrap(~si_code)+
-  guides(fill = guide_legend(title.position = "top",
-                             label.position = "bottom",
-                             nrow = 1)) -> vpd_ppfd
-
-plot_grid(shift_legend(vpd_ppfd)) -> vpd_ppfd
-
-grid.newpage()
-dim(vpd_ppfd)
-pdf(file ="plots/vpd_ppfd_cor.pdf",width=16,height=9)
-vpd_ppfd
-dev.off()
-
-
-covar_data_unique %>% 
-  ggplot(aes(x=log_ppfd,y=log_swc, color = si_biome))+
-  geom_point(shape=21)+
-  geom_smooth(method = "lm", color = "grey10")+
-  stat_cor(method = "pearson", aes(label = ..r.label..),
-           label.x = -6, label.y = -2, color = "grey10")+
-  scale_color_manual(values = custom_palette)+
-  xlab("ln(PPFD)")+
-  ylab("ln(SWC)")+
-  theme(legend.direction = "horizontal",
-        legend.background = element_rect(fill="transparent",colour=NA),
-        legend.title = element_blank(),
-        strip.background = element_rect(fill="transparent",colour=NA))+
-  facet_wrap(~si_code)+
-  guides(fill = guide_legend(title.position = "top",
-                             label.position = "bottom",
-                             nrow = 1)) -> swc_ppfd
-
-plot_grid(shift_legend(swc_ppfd)) -> swc_ppfd
-
-grid.newpage()
-dim(swc_ppfd)
-pdf(file ="plots/swc_ppfd_cor.pdf",width=16,height=9)
-swc_ppfd
-dev.off()
-
-
 
 summary_data <-purrr::map(site_names,function(x){
   load(paste0(path,x))
@@ -691,70 +896,69 @@ summary_data <-purrr::map(site_names,function(x){
               `n species` = pl_species%>% unique() %>% length())
   return(faa)
 }) %>% bind_rows()
-
 # 
-resume <- data_plant %>%
-  left_join(summary_data) %>%
-  mutate(si_lat = round(si_lat,2) %>% as.character(),
-         si_long = round(si_long,2) %>% as.character()) %>%
-  dplyr::select(si_code,
-                si_lat,
-                si_long,
-                si_biome,
-                n_days_complete,
-                `n species`,
-                `n trees`) %>%
-  filter(!is.na(n_days_complete))
+# resume <- data_plant %>% 
+#   left_join(summary_data) %>% 
+#   mutate(si_lat = round(si_lat,2) %>% as.character(),
+#          si_long = round(si_long,2) %>% as.character()) %>% 
+#   dplyr::select(si_code,
+#                 si_lat,
+#                 si_long,
+#                 si_biome,
+#                 n_days_complete,
+#                 `n species`,
+#                 `n trees`) %>% 
+#   filter(!is.na(n_days_complete))
+# 
+# write_csv(resume, file="resume_table.csv")
 
-write_csv(resume, file="resume_table.csv")
 
-
-resume2 <- data_plant %>%
-  dplyr::select(si_code,
-                `$R[2]_{vpd}$` = r2_G_log_vpd,
-                `$R[2]_{swc}$` = r2_G_log_swc,
-                `$R[2]_{ppfd}$` =r2_G_log_ppfd,
-                `Relimp VPD` = vpd_rel,
-                `Relimp SWC` = swc_rel,
-                `Relimp PPFD` = ppfd_rel,
-                PPET = PPET,
-                `$\text{P-PET_{sd}}$` = P_PETsd,
-                Clay = clay,
-                Sand = sand,
-                `Total N` = nitrogen,
-                Bedrock = bedrock,
-                `Stand height` = st_height,
-                LAI = LAI,
-                st_clay_perc,
-                st_sand_perc,
-                st_height1 = st_height1,
-                pl_height,
-                st_lai)  %>%
-  filter(!is.na(`$R[2]_{vpd}$`))%>%
-  dplyr::mutate(`$R[2]_{vpd}$` = format(round(`$R[2]_{vpd}$`,2), nsmall = 2),
-                `$R[2]_{swc}$` = format(round(`$R[2]_{swc}$`,2), nsmall = 2),
-                `$R[2]_{ppfd}$` = format(round(`$R[2]_{ppfd}$`,2), nsmall = 2),
-                `Relimp VPD` = format(round(`Relimp VPD`,2), nsmall = 2),
-                `Relimp SWC` = format(round(`Relimp SWC`,2), nsmall = 2),
-                `Relimp PPFD` = format(round(`Relimp PPFD`,2), nsmall = 2),
-                PPET = format(round(PPET,2), nsmall = 2),
-                `$\text{P-PET_{sd}}$` = format(round(`$\text{P-PET_{sd}}$`,2), nsmall = 2),
-                Clay = paste0(format(round(Clay,2), nsmall = 2),
-                              ifelse(is.na(st_clay_perc)," b", " a")),
-                Sand = paste0(format(round(Sand,2), nsmall = 2),
-                              ifelse(is.na(st_sand_perc)," b", " a")),
-                `Total N` = format(round(`Total N`,2), nsmall = 2),
-                Bedrock = format(round(Bedrock,2), nsmall = 2),
-                height = case_when(!is.na(st_height1)~as.character(" a") ,
-                                   is.na(st_height1)&!is.na(pl_height)~as.character(" c"),
-                                   is.na(st_height1)&is.na(pl_height)~as.character(" b")),
-                `Stand height` = paste0(format(round(`Stand height`,2), nsmall = 2),
-                                        as.character(height)),
-                LAI = paste0(format(round(LAI,2), nsmall = 2),
-                             ifelse(is.na(st_lai)," b", " a"))) %>%
-  dplyr::select(-height,-pl_height,-st_lai,-st_height1,-st_clay_perc,-st_sand_perc)
-
-write_csv(resume2, file="resume_table2.csv")
+# resume2 <- data_plant %>% 
+#   dplyr::select(si_code,
+#                 `$R[2]_{vpd}$` = r2_G_log_vpd,
+#                 `$R[2]_{swc}$` = r2_G_log_swc,
+#                 `$R[2]_{ppfd}$` =r2_G_log_ppfd,
+#                 `Relimp VPD` = vpd_rel,
+#                 `Relimp SWC` = swc_rel,
+#                 `Relimp PPFD` = ppfd_rel,
+#                 PPET = PPET,
+#                 `$\text{P-PET_{sd}}$` = P_PETsd,
+#                 Clay = clay,
+#                 Sand = sand,
+#                 `Total N` = nitrogen,
+#                 Bedrock = bedrock,
+#                 `Stand height` = st_height,
+#                 LAI = LAI,
+#                 st_clay_perc,
+#                 st_sand_perc,
+#                 st_height1 = st_height1,
+#                 pl_height,
+#                 st_lai)  %>% 
+#   filter(!is.na(`$R[2]_{vpd}$`))%>% 
+#   dplyr::mutate(`$R[2]_{vpd}$` = format(round(`$R[2]_{vpd}$`,2), nsmall = 2),
+#                 `$R[2]_{swc}$` = format(round(`$R[2]_{swc}$`,2), nsmall = 2),
+#                 `$R[2]_{ppfd}$` = format(round(`$R[2]_{ppfd}$`,2), nsmall = 2),
+#                 `Relimp VPD` = format(round(`Relimp VPD`,2), nsmall = 2),
+#                 `Relimp SWC` = format(round(`Relimp SWC`,2), nsmall = 2),
+#                 `Relimp PPFD` = format(round(`Relimp PPFD`,2), nsmall = 2),
+#                 PPET = format(round(PPET,2), nsmall = 2),
+#                 `$\text{P-PET_{sd}}$` = format(round(`$\text{P-PET_{sd}}$`,2), nsmall = 2),
+#                 Clay = paste0(format(round(Clay,2), nsmall = 2),
+#                               ifelse(is.na(st_clay_perc)," b", " a")),
+#                 Sand = paste0(format(round(Sand,2), nsmall = 2),
+#                               ifelse(is.na(st_sand_perc)," b", " a")),
+#                 `Total N` = format(round(`Total N`,2), nsmall = 2),
+#                 Bedrock = format(round(Bedrock,2), nsmall = 2),
+#                 height = case_when(!is.na(st_height1)~as.character(" a") ,
+#                                    is.na(st_height1)&!is.na(pl_height)~as.character(" c"),
+#                                    is.na(st_height1)&is.na(pl_height)~as.character(" b")),
+#                 `Stand height` = paste0(format(round(`Stand height`,2), nsmall = 2),
+#                                         as.character(height)),
+#                 LAI = paste0(format(round(LAI,2), nsmall = 2),
+#                              ifelse(is.na(st_lai)," b", " a"))) %>%
+#   dplyr::select(-height,-pl_height,-st_lai,-st_height1,-st_clay_perc,-st_sand_perc)
+# 
+# write_csv(resume2, file="resume_table2.csv")
 
 # Hidrometeorological correlations ---------------
 
@@ -831,11 +1035,11 @@ theme0 <- function(...) theme( legend.position = "none",
 #### VPD SM RAD G_LOG
 
 data_plant$si_biome <- factor(data_plant$si_biome, 
-                       levels = c("DRY", 
-                                  "WOOD", 
-                                  "TEMP",
-                                  "BOR",
-                                  "TROP"))
+                              levels = c("DRY", 
+                                         "WOOD", 
+                                         "TEMP",
+                                         "BOR",
+                                         "TROP"))
 
 p_vpd_swc <-ggplot(data_plant %>% filter(!is.na(si_biome)),aes(y=r2_G_log_vpd,x=r2_G_log_swc)) +
   geom_point(aes(color = si_biome),alpha = 1,show.legend=FALSE) +
@@ -854,7 +1058,7 @@ p_vpd_swc <-ggplot(data_plant %>% filter(!is.na(si_biome)),aes(y=r2_G_log_vpd,x=
         panel.grid.minor = element_blank(),
         legend.text = element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12),
+        axis.text = element_text(size=16),
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank())+
   scale_alpha_continuous(range = c(0, 1),
@@ -888,7 +1092,7 @@ p_par_swc <-ggplot(data_plant%>% filter(!is.na(si_biome)),aes(y = r2_G_log_ppfd,
         panel.grid.minor = element_blank(),
         legend.text = element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12))+
+        axis.text = element_text(size=16))+
   scale_alpha_continuous(range = c(0, 1),
                          guide = 'none')+
   scale_fill_manual(values = custom_palette)+
@@ -917,7 +1121,7 @@ p_par_vpd <-ggplot(data_plant%>% filter(!is.na(si_biome)),aes(x=r2_G_log_ppfd,y=
         panel.grid.minor = element_blank(),
         legend.text=element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12),
+        axis.text = element_text(size=16),
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank())+
   scale_alpha_continuous(range = c(0, 1),
@@ -942,7 +1146,7 @@ p_par <- ggplot(data_plant%>% filter(!is.na(si_biome)),aes(x=r2_G_log_ppfd,colou
         panel.grid.minor = element_blank(),
         legend.text=element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12),
+        axis.text = element_text(size=16),
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank())+
   scale_color_manual(guide = 'none',
@@ -963,7 +1167,7 @@ p_swc <- ggplot(data_plant%>% filter(!is.na(si_biome)),aes(x=r2_G_log_swc,colour
         panel.grid.minor = element_blank(),
         legend.text=element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12),
+        axis.text = element_text(size=16),
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank())+
   scale_color_manual(guide = 'none',
@@ -985,7 +1189,7 @@ p_vpd <- ggplot(data_plant%>% filter(!is.na(si_biome)),aes(x=r2_G_log_vpd,colour
         panel.grid.minor = element_blank(),
         legend.text=element_text(size=16),
         legend.title = element_text(size=18),
-        axis.text = element_text(size=12),
+        axis.text = element_text(size=16),
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank())+
   scale_color_manual(guide = 'none',
@@ -1130,38 +1334,38 @@ df_comp1 <- tibble(Biome = vpd_swc$si_biome,
                                            symbols = c("***", "**", "*", ".", " ")),
                                     " ",
                                     vpd_swc$.group
-                                    ))
+                   ))
 df_comp2 <- tibble(Biome = vpd_ppfd$si_biome %>% as.character(),
-                  vpd_ppfd = paste0(round(vpd_ppfd$emmean,3),
-                                   symnum(vpd_ppfd_p$p.value,corr = FALSE,na = FALSE,
-                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                                          symbols = c("***", "**", "*", ".", " ")),
-                                   " ",
-                                   vpd_ppfd$.group))
+                   vpd_ppfd = paste0(round(vpd_ppfd$emmean,3),
+                                     symnum(vpd_ppfd_p$p.value,corr = FALSE,na = FALSE,
+                                            cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                            symbols = c("***", "**", "*", ".", " ")),
+                                     " ",
+                                     vpd_ppfd$.group))
 df_comp3 <- tibble(Biome = swc_ppfd$si_biome %>% as.character(),
-                  swc_ppfd = paste0(round(swc_ppfd$emmean,3),
-                                   symnum(swc_ppfd_p$p.value,corr = FALSE,na = FALSE,
-                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                                          symbols = c("***", "**", "*", ".", " ")),
-                                   " ",
-                                   swc_ppfd$.group))
+                   swc_ppfd = paste0(round(swc_ppfd$emmean,3),
+                                     symnum(swc_ppfd_p$p.value,corr = FALSE,na = FALSE,
+                                            cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                            symbols = c("***", "**", "*", ".", " ")),
+                                     " ",
+                                     swc_ppfd$.group))
 df_comp4 <- tibble(Biome = vpd_alone$si_biome %>% as.character(),
-                  vpd_alone = paste0(round(vpd_alone$emmean,3),
-                                   " ",
-                                   vpd_alone$.group))
+                   vpd_alone = paste0(round(vpd_alone$emmean,3),
+                                      " ",
+                                      vpd_alone$.group))
 df_comp5 <- tibble(Biome = swc_alone$si_biome %>% as.character(),
-                  swc_alone = paste0(round(swc_alone$emmean,3),
-                                   " ",
-                                   swc_alone$.group))
+                   swc_alone = paste0(round(swc_alone$emmean,3),
+                                      " ",
+                                      swc_alone$.group))
 df_comp6 <- tibble(Biome = ppfd_alone$si_biome %>% as.character(),                  
                    ppfd_alone = paste0(round(ppfd_alone$emmean,3),
-                                   " ",
-                                   ppfd_alone$.group))
+                                       " ",
+                                       ppfd_alone$.group))
 df_comp7 <- tibble(Biome = complete_alone$si_biome %>% as.character(),
-                  complete_alone = paste0(round(complete_alone$emmean,3),
-                                   " ",
-                                   complete_alone$.group)
-                  )
+                   complete_alone = paste0(round(complete_alone$emmean,3),
+                                           " ",
+                                           complete_alone$.group)
+)
 
 df_comp <- df_comp4 %>% 
   left_join(df_comp5) %>% 
@@ -1173,14 +1377,645 @@ df_comp <- df_comp4 %>%
 
 write_csv(df_comp, file = "comparison_biome.csv")
 
+
+
+
+### SWC - ERA5 COMPARISON of individual variables ---------------------------
+
+data_plant_swc <- data_plant %>% 
+  filter(!is.na(r2_G_log_vpd_swcsfn))
+
+mod1_swcsfn <- lm((r2_G_log_vpd_swcsfn-r2_G_log_swc_swcsfn)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'),
+              Letters = LETTERS) -> vpd_swc_swcsfn
+vpd_swc_swcsfn <- vpd_swc_swcsfn[order(factor(vpd_swc_swcsfn$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0) -> vpd_swc_swcsfn_p
+vpd_swc_swcsfn_p <- vpd_swc_swcsfn_p[order(factor(vpd_swc_swcsfn_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+mod1_swcsfn <- lm((r2_G_log_vpd_swcsfn-r2_G_log_ppfd_swcsfn)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_ppfd_swcsfn
+vpd_ppfd_swcsfn <- vpd_ppfd_swcsfn[order(factor(vpd_ppfd_swcsfn$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0) -> vpd_ppfd_swcsfn_p
+vpd_ppfd_swcsfn_p <- vpd_ppfd_swcsfn_p[order(factor(vpd_ppfd_swcsfn_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+mod1_swcsfn <- lm((r2_G_log_swc_swcsfn-r2_G_log_ppfd_swcsfn)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_ppfd_swcsfn
+swc_ppfd_swcsfn <- swc_ppfd_swcsfn[order(factor(swc_ppfd_swcsfn$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0) -> swc_ppfd_swcsfn_p
+swc_ppfd_swcsfn_p <- swc_ppfd_swcsfn_p[order(factor(swc_ppfd_swcsfn_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+
+mod1_swcsfn <- lm((r2_G_log_swc_swcsfn)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_swcsfn_alone
+swc_swcsfn_alone <- swc_swcsfn_alone[order(factor(swc_swcsfn_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1_swcsfn <- lm((r2_G_log_vpd_swcsfn)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_swcsfn_alone
+vpd_swcsfn_alone <- vpd_swcsfn_alone[order(factor(vpd_swcsfn_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1_swcsfn <- lm((r2_G_log_ppfd_swcsfn) ~ si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> ppfd_swcsfn_alone
+ppfd_swcsfn_alone <- ppfd_swcsfn_alone[order(factor(ppfd_swcsfn_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1_swcsfn <- lm(r2_G_log_swcsfn~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> complete_swcsfn_alone
+complete_swcsfn_alone <- complete_swcsfn_alone[order(factor(complete_swcsfn_alone$si_biome, 
+                                                            levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome'),0)
+
+
+df_comp1_swcsfn <- tibble(Biome = vpd_swc_swcsfn$si_biome,
+                          vpd_swc_swcsfn = paste0(round(vpd_swc_swcsfn$emmean,3),
+                                                  symnum(vpd_swc_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                         cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                         symbols = c("***", "**", "*", ".", " ")),
+                                                  " ",
+                                                  vpd_swc_swcsfn$.group
+                          ))
+df_comp2_swcsfn <- tibble(Biome = vpd_ppfd_swcsfn$si_biome %>% as.character(),
+                          vpd_ppfd_swcsfn = paste0(round(vpd_ppfd_swcsfn$emmean,3),
+                                                   symnum(vpd_ppfd_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                          symbols = c("***", "**", "*", ".", " ")),
+                                                   " ",
+                                                   vpd_ppfd_swcsfn$.group))
+df_comp3_swcsfn <- tibble(Biome = swc_ppfd_swcsfn$si_biome %>% as.character(),
+                          swc_ppfd_swcsfn = paste0(round(swc_ppfd_swcsfn$emmean,3),
+                                                   symnum(swc_ppfd_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                          symbols = c("***", "**", "*", ".", " ")),
+                                                   " ",
+                                                   swc_ppfd_swcsfn$.group))
+df_comp4_swcsfn <- tibble(Biome = vpd_swcsfn_alone$si_biome %>% as.character(),
+                          vpd_swcsfn_alone = paste0(round(vpd_swcsfn_alone$emmean,3),
+                                                    " ",
+                                                    vpd_swcsfn_alone$.group))
+df_comp5_swcsfn <- tibble(Biome = swc_swcsfn_alone$si_biome %>% as.character(),
+                          swc_swcsfn_alone = paste0(round(swc_swcsfn_alone$emmean,3),
+                                                    " ",
+                                                    swc_swcsfn_alone$.group))
+df_comp6_swcsfn <- tibble(Biome = ppfd_swcsfn_alone$si_biome %>% as.character(),                  
+                          ppfd_swcsfn_alone = paste0(round(ppfd_swcsfn_alone$emmean,3),
+                                                     " ",
+                                                     ppfd_swcsfn_alone$.group))
+df_comp7_swcsfn <- tibble(Biome = complete_swcsfn_alone$si_biome %>% as.character(),
+                          complete_swcsfn_alone = paste0(round(complete_swcsfn_alone$emmean,3),
+                                                         " ",
+                                                         complete_swcsfn_alone$.group)
+)
+
+df_comp_swcsfn <- df_comp4_swcsfn %>% 
+  left_join(df_comp5_swcsfn) %>% 
+  left_join(df_comp6_swcsfn) %>% 
+  left_join(df_comp7_swcsfn) %>% 
+  left_join(df_comp1_swcsfn) %>% 
+  left_join(df_comp2_swcsfn) %>% 
+  left_join(df_comp3_swcsfn)
+
+write_csv(df_comp_swcsfn, file = "comparison_biome_swc.csv")
+
+
+
+### G COMPARISON of individual variables USING SWC SFN SUBSET ---------------------------
+
+mod1 <- lm((r2_G_log_vpd-r2_G_log_swc)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_swc
+vpd_swc <- vpd_swc[order(factor(vpd_swc$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> vpd_swc_p
+vpd_swc_p <- vpd_swc_p[order(factor(vpd_swc_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+mod1 <- lm((r2_G_log_vpd-r2_G_log_ppfd)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_ppfd
+vpd_ppfd <- vpd_ppfd[order(factor(vpd_ppfd$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> vpd_ppfd_p
+vpd_ppfd_p <- vpd_ppfd_p[order(factor(vpd_ppfd_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+mod1 <- lm((r2_G_log_swc-r2_G_log_ppfd)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_ppfd
+swc_ppfd <- swc_ppfd[order(factor(swc_ppfd$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> swc_ppfd_p
+swc_ppfd_p <- swc_ppfd_p[order(factor(swc_ppfd_p$si_biome, levels=levels(data_plant_swc$si_biome))),]
+
+
+mod1 <- lm((r2_G_log_swc)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+anova(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_alone
+swc_alone <- swc_alone[order(factor(swc_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1 <- lm((r2_G_log_vpd)~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+anova(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_alone
+vpd_alone <- vpd_alone[order(factor(vpd_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1 <- lm((r2_G_log_ppfd) ~ si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+anova(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> ppfd_alone
+ppfd_alone <- ppfd_alone[order(factor(ppfd_alone$si_biome, levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0)
+# plot(mod1)
+
+
+mod1 <- lm(r2_G_log~si_biome , data = data_plant_swc, weights = n_days_complete)
+summary(mod1)
+anova(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> complete_alone
+complete_alone <- complete_alone[order(factor(complete_alone$si_biome, 
+                                              levels=levels(data_plant_swc$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0)
+
+
+df_comp1 <- tibble(Biome = vpd_swc$si_biome,
+                   vpd_swc = paste0(round(vpd_swc$emmean,3),
+                                    symnum(vpd_swc_p$p.value,corr = FALSE,na = FALSE,
+                                           cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                           symbols = c("***", "**", "*", ".", " ")),
+                                    " ",
+                                    vpd_swc$.group
+                   ))
+df_comp2 <- tibble(Biome = vpd_ppfd$si_biome %>% as.character(),
+                   vpd_ppfd = paste0(round(vpd_ppfd$emmean,3),
+                                     symnum(vpd_ppfd_p$p.value,corr = FALSE,na = FALSE,
+                                            cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                            symbols = c("***", "**", "*", ".", " ")),
+                                     " ",
+                                     vpd_ppfd$.group))
+df_comp3 <- tibble(Biome = swc_ppfd$si_biome %>% as.character(),
+                   swc_ppfd = paste0(round(swc_ppfd$emmean,3),
+                                     symnum(swc_ppfd_p$p.value,corr = FALSE,na = FALSE,
+                                            cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                            symbols = c("***", "**", "*", ".", " ")),
+                                     " ",
+                                     swc_ppfd$.group))
+df_comp4 <- tibble(Biome = vpd_alone$si_biome %>% as.character(),
+                   vpd_alone = paste0(round(vpd_alone$emmean,3),
+                                      " ",
+                                      vpd_alone$.group))
+df_comp5 <- tibble(Biome = swc_alone$si_biome %>% as.character(),
+                   swc_alone = paste0(round(swc_alone$emmean,3),
+                                      " ",
+                                      swc_alone$.group))
+df_comp6 <- tibble(Biome = ppfd_alone$si_biome %>% as.character(),                  
+                   ppfd_alone = paste0(round(ppfd_alone$emmean,3),
+                                       " ",
+                                       ppfd_alone$.group))
+df_comp7 <- tibble(Biome = complete_alone$si_biome %>% as.character(),
+                   complete_alone = paste0(round(complete_alone$emmean,3),
+                                           " ",
+                                           complete_alone$.group)
+)
+
+df_comp_subset <- df_comp4 %>% 
+  left_join(df_comp5) %>% 
+  left_join(df_comp6) %>% 
+  left_join(df_comp7) %>% 
+  left_join(df_comp1) %>% 
+  left_join(df_comp2) %>% 
+  left_join(df_comp3)
+
+write_csv(df_comp_subset, file = "comparison_biome_subset.csv")
+
+
+### SWC - ERA5 COMPARISON + G subset simultaneously ---------------------------
+data_plant %>% 
+  filter(!is.na(r2_G_log_vpd_swcsfn)) %>% 
+  dplyr::select(r2_G_log_vpd,r2_G_log_swc,
+                r2_G_log_ppfd,r2_G_log,
+                r2_G_log_vpd_swcsfn,r2_G_log_swc_swcsfn,
+                r2_G_log_ppfd_swcsfn,r2_G_log_swcsfn,
+                si_code,si_biome,n_days_complete)%>% 
+  pivot_longer(cols=starts_with("r2_")) %>% 
+  cbind(type = c("VPD","SWC","PPFD","COMPLETE"),
+        MODELS = c(rep("ERA5",4),
+                   rep("SFN",4)
+        )
+  )  %>% 
+  mutate(si_biome_models = paste(si_biome,MODELS)) %>% 
+  dplyr::select(si_code, si_biome_models, type, value, n_days_complete) %>% 
+  pivot_wider(names_from = type, values_from = value) %>% 
+  mutate(si_biome_models = factor(si_biome_models,
+                                  levels = c("DRY ERA5","DRY SFN",
+                                             "WOOD ERA5","WOOD SFN",
+                                             "TEMP ERA5","TEMP SFN",
+                                             "BOR ERA5","BOR SFN",
+                                             "TROP ERA5","TROP SFN"      
+                                  )))-> data_plant_subset
+
+
+
+mod1_swcsfn <- lm((VPD-SWC)~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),
+              Letters = LETTERS) -> vpd_swc_swcsfn
+vpd_swc_swcsfn <- vpd_swc_swcsfn[order(factor(vpd_swc_swcsfn$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0) -> vpd_swc_swcsfn_p
+vpd_swc_swcsfn_p <- vpd_swc_swcsfn_p[order(factor(vpd_swc_swcsfn_p$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+
+mod1_swcsfn <- lm((VPD-PPFD)~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> vpd_ppfd_swcsfn
+vpd_ppfd_swcsfn <- vpd_ppfd_swcsfn[order(factor(vpd_ppfd_swcsfn$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0) -> vpd_ppfd_swcsfn_p
+vpd_ppfd_swcsfn_p <- vpd_ppfd_swcsfn_p[order(factor(vpd_ppfd_swcsfn_p$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+
+mod1_swcsfn <- lm((SWC-PPFD)~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> swc_ppfd_swcsfn
+swc_ppfd_swcsfn <- swc_ppfd_swcsfn[order(factor(swc_ppfd_swcsfn$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0) -> swc_ppfd_swcsfn_p
+swc_ppfd_swcsfn_p <- swc_ppfd_swcsfn_p[order(factor(swc_ppfd_swcsfn_p$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+
+
+mod1_swcsfn <- lm((SWC)~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> swc_swcsfn_alone
+swc_swcsfn_alone <- swc_swcsfn_alone[order(factor(swc_swcsfn_alone$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0)
+
+
+mod1_swcsfn <- lm((VPD)~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> vpd_swcsfn_alone
+vpd_swcsfn_alone <- vpd_swcsfn_alone[order(factor(vpd_swcsfn_alone$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0)
+
+
+mod1_swcsfn <- lm((PPFD) ~ si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> ppfd_swcsfn_alone
+ppfd_swcsfn_alone <- ppfd_swcsfn_alone[order(factor(ppfd_swcsfn_alone$si_biome_models, levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0)
+
+
+mod1_swcsfn <- lm(COMPLETE~si_biome_models , data = data_plant_subset, weights = n_days_complete)
+summary(mod1_swcsfn)
+anova(mod1_swcsfn)
+multcomp::cld(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'), 
+              Letters = LETTERS) -> complete_swcsfn_alone
+complete_swcsfn_alone <- complete_swcsfn_alone[order(factor(complete_swcsfn_alone$si_biome_models, 
+                                                            levels=levels(data_plant_subset$si_biome_models))),]
+emmeans::test(mod1_swcsfn %>% emmeans::emmeans('si_biome_models'),0)
+
+
+df_comp1_swcsfn <- tibble(Biome = vpd_swc_swcsfn$si_biome_models,
+                          vpd_swc_swcsfn = paste0(round(vpd_swc_swcsfn$emmean,3),
+                                                  symnum(vpd_swc_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                         cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                         symbols = c("***", "**", "*", ".", " ")),
+                                                  " ",
+                                                  vpd_swc_swcsfn$.group
+                          ))
+df_comp2_swcsfn <- tibble(Biome = vpd_ppfd_swcsfn$si_biome_models %>% as.character(),
+                          vpd_ppfd_swcsfn = paste0(round(vpd_ppfd_swcsfn$emmean,3),
+                                                   symnum(vpd_ppfd_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                          symbols = c("***", "**", "*", ".", " ")),
+                                                   " ",
+                                                   vpd_ppfd_swcsfn$.group))
+df_comp3_swcsfn <- tibble(Biome = swc_ppfd_swcsfn$si_biome_models %>% as.character(),
+                          swc_ppfd_swcsfn = paste0(round(swc_ppfd_swcsfn$emmean,3),
+                                                   symnum(swc_ppfd_swcsfn_p$p.value,corr = FALSE,na = FALSE,
+                                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                          symbols = c("***", "**", "*", ".", " ")),
+                                                   " ",
+                                                   swc_ppfd_swcsfn$.group))
+df_comp4_swcsfn <- tibble(Biome = vpd_swcsfn_alone$si_biome_models %>% as.character(),
+                          vpd_swcsfn_alone = paste0(round(vpd_swcsfn_alone$emmean,3),
+                                                    " ",
+                                                    vpd_swcsfn_alone$.group))
+df_comp5_swcsfn <- tibble(Biome = swc_swcsfn_alone$si_biome_models %>% as.character(),
+                          swc_swcsfn_alone = paste0(round(swc_swcsfn_alone$emmean,3),
+                                                    " ",
+                                                    swc_swcsfn_alone$.group))
+df_comp6_swcsfn <- tibble(Biome = ppfd_swcsfn_alone$si_biome_models %>% as.character(),                  
+                          ppfd_swcsfn_alone = paste0(round(ppfd_swcsfn_alone$emmean,3),
+                                                     " ",
+                                                     ppfd_swcsfn_alone$.group))
+df_comp7_swcsfn <- tibble(Biome = complete_swcsfn_alone$si_biome_models %>% as.character(),
+                          complete_swcsfn_alone = paste0(round(complete_swcsfn_alone$emmean,3),
+                                                         " ",
+                                                         complete_swcsfn_alone$.group)
+)
+
+# data_plant_subset %>% dplyr::select(si_biome_models) %>% table()
+
+df_comp_subset <- df_comp4_swcsfn %>% 
+  left_join(df_comp5_swcsfn) %>% 
+  left_join(df_comp6_swcsfn) %>% 
+  left_join(df_comp7_swcsfn) %>% 
+  left_join(df_comp1_swcsfn) %>% 
+  left_join(df_comp2_swcsfn) %>% 
+  left_join(df_comp3_swcsfn)
+
+write_csv(df_comp_subset, file = "comparison_biome_subset.csv")
+
+
+### TREE G_LOG COMPARISON of individual variables ---------------------------
+
+mod1_tree <- lm((r2_G_log_vpd_tree-r2_G_log_swc_tree)~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'),
+              Letters = LETTERS) -> vpd_swc_tree
+vpd_swc_tree <- vpd_swc_tree[order(factor(vpd_swc_tree$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0) -> vpd_swc_tree_p
+vpd_swc_tree_p <- vpd_swc_tree_p[order(factor(vpd_swc_tree_p$si_biome, levels=levels(data_plant$si_biome))),]
+
+mod1_tree <- lm((r2_G_log_vpd_tree-r2_G_log_ppfd_tree)~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_ppfd_tree
+vpd_ppfd_tree <- vpd_ppfd_tree[order(factor(vpd_ppfd_tree$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0) -> vpd_ppfd_tree_p
+vpd_ppfd_tree_p <- vpd_ppfd_tree_p[order(factor(vpd_ppfd_tree_p$si_biome, levels=levels(data_plant$si_biome))),]
+
+mod1_tree <- lm((r2_G_log_swc_tree-r2_G_log_ppfd_tree)~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_ppfd_tree
+swc_ppfd_tree <- swc_ppfd_tree[order(factor(swc_ppfd_tree$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0) -> swc_ppfd_tree_p
+swc_ppfd_tree_p <- swc_ppfd_tree_p[order(factor(swc_ppfd_tree_p$si_biome, levels=levels(data_plant$si_biome))),]
+
+
+mod1_tree <- lm((r2_G_log_swc_tree)~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+anova(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_tree_alone
+swc_tree_alone <- swc_tree_alone[order(factor(swc_tree_alone$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1_tree <- lm((r2_G_log_vpd_tree)~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+anova(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_tree_alone
+vpd_tree_alone <- vpd_tree_alone[order(factor(vpd_tree_alone$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0)
+
+
+mod1_tree <- lm((r2_G_log_ppfd_tree) ~ si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+anova(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> ppfd_tree_alone
+ppfd_tree_alone <- ppfd_tree_alone[order(factor(ppfd_tree_alone$si_biome, levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0)
+# plot(mod1)
+
+
+mod1_tree <- lm(r2_G_log_tree~si_biome , data = data_plant, weights = n_days_complete)
+summary(mod1_tree)
+anova(mod1_tree)
+multcomp::cld(mod1_tree %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> complete_tree_alone
+complete_tree_alone <- complete_tree_alone[order(factor(complete_tree_alone$si_biome, 
+                                                        levels=levels(data_plant$si_biome))),]
+emmeans::test(mod1_tree %>% emmeans::emmeans('si_biome'),0)
+
+
+df_comp1_tree <- tibble(Biome = vpd_swc_tree$si_biome,
+                        vpd_swc_tree = paste0(round(vpd_swc_tree$emmean,3),
+                                              symnum(vpd_swc_tree_p$p.value,corr = FALSE,na = FALSE,
+                                                     cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                     symbols = c("***", "**", "*", ".", " ")),
+                                              " ",
+                                              vpd_swc_tree$.group
+                        ))
+df_comp2_tree <- tibble(Biome = vpd_ppfd_tree$si_biome %>% as.character(),
+                        vpd_ppfd_tree = paste0(round(vpd_ppfd_tree$emmean,3),
+                                               symnum(vpd_ppfd_tree_p$p.value,corr = FALSE,na = FALSE,
+                                                      cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                      symbols = c("***", "**", "*", ".", " ")),
+                                               " ",
+                                               vpd_ppfd_tree$.group))
+df_comp3_tree <- tibble(Biome = swc_ppfd_tree$si_biome %>% as.character(),
+                        swc_ppfd_tree = paste0(round(swc_ppfd_tree$emmean,3),
+                                               symnum(swc_ppfd_tree_p$p.value,corr = FALSE,na = FALSE,
+                                                      cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                                      symbols = c("***", "**", "*", ".", " ")),
+                                               " ",
+                                               swc_ppfd_tree$.group))
+df_comp4_tree <- tibble(Biome = vpd_tree_alone$si_biome %>% as.character(),
+                        vpd_tree_alone = paste0(round(vpd_tree_alone$emmean,3),
+                                                " ",
+                                                vpd_tree_alone$.group))
+df_comp5_tree <- tibble(Biome = swc_tree_alone$si_biome %>% as.character(),
+                        swc_tree_alone = paste0(round(swc_tree_alone$emmean,3),
+                                                " ",
+                                                swc_tree_alone$.group))
+df_comp6_tree <- tibble(Biome = ppfd_tree_alone$si_biome %>% as.character(),                  
+                        ppfd_tree_alone = paste0(round(ppfd_tree_alone$emmean,3),
+                                                 " ",
+                                                 ppfd_tree_alone$.group))
+df_comp7_tree <- tibble(Biome = complete_tree_alone$si_biome %>% as.character(),
+                        complete_tree_alone = paste0(round(complete_tree_alone$emmean,3),
+                                                     " ",
+                                                     complete_tree_alone$.group)
+)
+
+df_comp_tree <- df_comp4_tree %>% 
+  left_join(df_comp5_tree) %>% 
+  left_join(df_comp6_tree) %>% 
+  left_join(df_comp7_tree) %>% 
+  left_join(df_comp1_tree) %>% 
+  left_join(df_comp2_tree) %>% 
+  left_join(df_comp3_tree)
+
+write_csv(df_comp_tree, file = "comparison_biome_tree.csv")
+
+
+### TEMPERATURE COMPARISON of individual variables ---------------------------
+
+models_ta <- models_ta %>%
+  left_join(biomes,by = 'si_code') %>% 
+  mutate(si_biome = recode(biome,
+                           `wood` = 'WOOD',
+                           `temp` = "TEMP",
+                           `bor` = "BOR",
+                           `tro` = "TROP",
+                           `dry` = 'DRY'),
+         si_biome = factor(si_biome,
+                           levels = c("DRY",
+                                      "WOOD",
+                                      "TEMP",
+                                      "BOR",
+                                      "TROP")))
+
+mod1 <- lm((r2_G_log_vpd-r2_G_log_ta)~si_biome , data = models_ta, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> vpd_ta
+vpd_ta <- vpd_ta[order(factor(vpd_ta$si_biome, levels=levels(models_ta$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> vpd_ta_p
+vpd_ta_p <- vpd_ta_p[order(factor(vpd_ta_p$si_biome, levels=levels(models_ta$si_biome))),]
+
+mod1 <- lm((r2_G_log_swc-r2_G_log_ta)~si_biome , data = models_ta, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> swc_ta
+swc_ta <- swc_ta[order(factor(swc_ta$si_biome, levels=levels(models_ta$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> swc_ta_p
+swc_ta_p <- swc_ta_p[order(factor(swc_ta_p$si_biome, levels=levels(models_ta$si_biome))),]
+
+mod1 <- lm((r2_G_log_ppfd-r2_G_log_ta)~si_biome , data = models_ta, weights = n_days_complete)
+summary(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> ppfd_ta
+ppfd_ta <- ppfd_ta[order(factor(ppfd_ta$si_biome, levels=levels(models_ta$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0) -> ppfd_ta_p
+ppfd_ta_p <- ppfd_ta_p[order(factor(ppfd_ta_p$si_biome, levels=levels(models_ta$si_biome))),]
+
+
+mod1 <- lm((r2_G_log_ta)~si_biome , data = models_ta, weights = n_days_complete)
+summary(mod1)
+anova(mod1)
+multcomp::cld(mod1 %>% emmeans::emmeans('si_biome'), 
+              Letters = LETTERS) -> ta_alone
+ta_alone <- ta_alone[order(factor(ta_alone$si_biome, levels=levels(models_ta$si_biome))),]
+emmeans::test(mod1 %>% emmeans::emmeans('si_biome'),0)
+
+df_comp1 <- tibble(Biome = vpd_ta$si_biome,
+                   vpd_ta = paste0(round(vpd_ta$emmean,3),
+                                   symnum(vpd_ta_p$p.value,corr = FALSE,na = FALSE,
+                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                          symbols = c("***", "**", "*", ".", " ")),
+                                   " ",
+                                   vpd_ta$.group
+                   ))
+df_comp2 <- tibble(Biome = swc_ta$si_biome %>% as.character(),
+                   swc_ta = paste0(round(swc_ta$emmean,3),
+                                   symnum(swc_ta_p$p.value,corr = FALSE,na = FALSE,
+                                          cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                          symbols = c("***", "**", "*", ".", " ")),
+                                   " ",
+                                   swc_ta$.group))
+df_comp3 <- tibble(Biome = ppfd_ta$si_biome %>% as.character(),
+                   ppfd_ta = paste0(round(ppfd_ta$emmean,3),
+                                    symnum(ppfd_ta_p$p.value,corr = FALSE,na = FALSE,
+                                           cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
+                                           symbols = c("***", "**", "*", ".", " ")),
+                                    " ",
+                                    ppfd_ta$.group))
+df_comp4 <- tibble(Biome = ta_alone$si_biome %>% as.character(),
+                   ta_alone = paste0(round(ta_alone$emmean,3),
+                                     " ",
+                                     ta_alone$.group))
+
+
+df_comp_ta <- df_comp4 %>% 
+  left_join(df_comp1) %>% 
+  left_join(df_comp2) %>% 
+  left_join(df_comp3)
+
+write_csv(df_comp_ta, file = "comparison_biome_ta.csv")
+
+fit <- cor(models_ta$r2_G_log_vpd, models_ta$r2_G_log_ta)
+fit
+fit <- lm(r2_G_log_vpd ~ r2_G_log_ta*si_biome,data=models_ta)
+emmeans::test(fit %>% emmeans::emtrends('si_biome',"r2_G_log_ta"),1)
+
+models_ta%>% 
+  ggplot(aes(r2_G_log_ta, r2_G_log_vpd, color = si_biome, group=si_biome))+
+  geom_point(size = 3)+
+  geom_abline(slope = 1, intercept=0)+
+  geom_smooth(#aes(linetype = si_biome ),
+    method = "lm", se = FALSE, show.legend = FALSE)+
+  scale_color_manual(values=custom_palette)+
+  # annotate("text", x = 0.12, y = 0.48,
+  #          label = '"**"', parse = TRUE, size = 8)+
+  # annotate("text", x = 0.9, y = 0.73,
+  #          label = '"."', parse = TRUE, size = 12)+
+  # scale_linetype_manual(values =c(1,4,4,4,2))+
+  labs(color = "Biome")+
+  ylab(expression(paste(~R[VPD]^2)))+
+  xlab(expression(paste(~R[TA]^2)))+
+  theme_bw() -> comparation_vpd_ta
+
+pdf(file ="plots/comparative_vpd_ta.pdf",width=8,height=5)
+comparation_vpd_ta
+dev.off()
+
+fit <- cor(models_ta$r2_G_log_ppfd, models_ta$r2_G_log_ta)
+fit
+fit <- lm(r2_G_log_ppfd ~ r2_G_log_ta*si_biome,data=models_ta)
+summary(fit)
+emmeans::test(fit %>% emmeans::emtrends('si_biome',"r2_G_log_ta"),1)
+
+
+models_ta%>% 
+  ggplot(aes(r2_G_log_ta, r2_G_log_ppfd, color = si_biome, group=si_biome))+
+  geom_point(size = 3)+
+  geom_abline(slope = 1, intercept=0)+
+  geom_smooth(#aes(linetype = si_biome ),
+    method = "lm", se = FALSE, show.legend = FALSE)+
+  scale_color_manual(values=custom_palette)+
+  # annotate("text", x = 0.12, y = 0.48,
+  #          label = '"**"', parse = TRUE, size = 8)+
+  # annotate("text", x = 0.9, y = 0.73,
+  #          label = '"."', parse = TRUE, size = 12)+
+  # scale_linetype_manual(values =c(1,4,4,4,2))+
+  labs(color = "Biome")+
+  ylab(expression(paste(~R[PPFD]^2)))+
+  xlab(expression(paste(~R[TA]^2)))+
+  theme_bw() -> comparation_ppfd_ta
+
+
 #### BIOCLIMATIC MODELS --------------------------------------------
 #### R2 COMPLETE MODEL 
 fee <- data_plant %>%
   filter(!is.na(r2_G_log)) %>%
   dplyr::select(r2_G_log_vpd,P_PET,P_PETsd,MAP, MAT, PET,st_height,clay,sand,
                 nitrogen,LAI,bedrock) %>% 
-  # mutate(nitrogen = log(nitrogen))
-  ungroup()
+  mutate(nitrogen = log(nitrogen))
 
 df2 = cor(fee, use = "complete.obs")
 hc = caret::findCorrelation(df2, cutoff=0.6,exact = TRUE,names=TRUE,verbose = TRUE) # putt any value as a "cutoff"
@@ -1199,7 +2034,7 @@ pca_out <- FactoMineR::PCA(fee[,-1], graph=TRUE)
 # reduced_Data = fee[,hc]
 # # print (reduced_Data)
 # pairs(data_plant %>% dplyr::select(PPET,st_height,MAT,MAP,clay,sand,MO,LAI,TOTN))
-lm(r2_G_log*100~(log(PPET)+log(P_PETsd)+clay+nitrogen+bedrock+st_height+LAI),
+lm(r2_G_log*100~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+bedrock+st_height+LAI),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu) -> mod1
@@ -1210,7 +2045,7 @@ dominanceanalysis::dominanceAnalysis(mod1)
 
 
 #### R2 VPD NN
-lm(r2_G_log_vpd*100~(log(PPET)+log(P_PETsd)+clay+nitrogen+bedrock+st_height+LAI),
+lm(r2_G_log_vpd*100~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+bedrock+st_height+LAI),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu) -> mod2
@@ -1224,7 +2059,7 @@ dominanceanalysis::dominanceAnalysis(mod2)
 
 
 #### R2 SWC NN
-lm(r2_G_log_swc*100~(log(PPET)+log(P_PETsd)+clay+nitrogen+bedrock+st_height+LAI),
+lm(r2_G_log_swc*100~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+bedrock+st_height+LAI),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu) -> mod3
@@ -1237,7 +2072,7 @@ dominanceanalysis::dominanceAnalysis(mod3)
 
 
 #### R2 PPFD NN
-lm(r2_G_log_ppfd*100~(log(PPET)+log(P_PETsd)+clay+nitrogen+bedrock+st_height+LAI),
+lm(r2_G_log_ppfd*100~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+bedrock+st_height+LAI),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu) -> mod4
@@ -1252,7 +2087,7 @@ dominanceanalysis::dominanceAnalysis(mod4)
 
 
 # #### R2 VPD rel
-lm(vpd_rel~(log(PPET)+log(P_PETsd)+clay+nitrogen+st_height+LAI+bedrock),
+lm(vpd_rel~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+st_height+LAI+bedrock),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu) -> mod5
@@ -1263,11 +2098,10 @@ performance::check_heteroscedasticity(mod5)
 
 
 # # #### R2 swc rel
-lm(swc_rel~(log(PPET)+log(P_PETsd)+clay+nitrogen+st_height+LAI+bedrock),
+lm(swc_rel~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+st_height+LAI+bedrock),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu)  -> mod6
-mod6 %>% summary()
 performance::check_collinearity(mod6)
 performance::check_distribution(mod6)
 performance::check_heteroscedasticity(mod6)
@@ -1278,11 +2112,10 @@ performance::check_heteroscedasticity(mod6)
 # # anova(mod6)
 # # 
 # # #### R2 ppfd rel
-lm(ppfd_rel~(log(PPET)+log(P_PETsd)+clay+nitrogen+st_height+LAI+bedrock),
+lm(ppfd_rel~(log(PPET)+log(P_PETsd)+clay+log(nitrogen)+st_height+LAI+bedrock),
    data=data_plant, weights = n_days_complete)->fuu
 fuu %>% summary()
 step(fuu)-> mod7
-mod7 %>% summary()
 performance::check_collinearity(mod7)
 performance::check_distribution(mod7)
 performance::check_heteroscedasticity(mod7)
@@ -1299,7 +2132,7 @@ m1 <- m1 %>%
   mutate(esti = paste(round(Estimate,3),
                       symnum(p_val,corr = FALSE,na = FALSE,
                              cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                             symbols = c("***", "**", "*", ".", "ns")))) %>% 
+                             symbols = c("***", "**", "*", ".", " ")))) %>% 
   dplyr::select(Variable,esti) %>% gather(key = key, value = value, 2:ncol(.)) %>% 
   spread(key = names(.)[1], value = "value") %>% 
   mutate(Variable = "VPD+SWC+PPFD")
@@ -1312,7 +2145,7 @@ m2 <- m2 %>%
   mutate(esti = paste(round(Estimate,3),
                       symnum(p_val,corr = FALSE,na = FALSE,
                              cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                             symbols = c("***", "**", "*", ".", "ns")))) %>% 
+                             symbols = c("***", "**", "*", ".", " ")))) %>% 
   dplyr::select(Variable,esti) %>% gather(key = key, value = value, 2:ncol(.)) %>% 
   spread(key = names(.)[1], value = "value") %>% 
   mutate(Variable = "VPD")
@@ -1324,7 +2157,7 @@ m3 <- m3 %>%
   mutate(esti = paste(round(Estimate,3),
                       symnum(p_val,corr = FALSE,na = FALSE,
                              cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                             symbols = c("***", "**", "*", ".", "ns")))) %>% 
+                             symbols = c("***", "**", "*", ".", " ")))) %>% 
   dplyr::select(Variable,esti) %>% gather(key = key, value = value, 2:ncol(.)) %>% 
   spread(key = names(.)[1], value = "value")%>% 
   mutate(Variable = "SWC")
@@ -1336,7 +2169,7 @@ m4 <- m4 %>%
   mutate(esti = paste(round(Estimate,3),
                       symnum(p_val,corr = FALSE,na = FALSE,
                              cutpoints = c(0,0.001, 0.01, 0.05, 0.1, 1),
-                             symbols = c("***", "**", "*", ".", "ns")))) %>% 
+                             symbols = c("***", "**", "*", ".", " ")))) %>% 
   dplyr::select(Variable,esti) %>% gather(key = key, value = value, 2:ncol(.)) %>% 
   spread(key = names(.)[1], value = "value")%>% 
   mutate(Variable = "PPFD")
@@ -1346,9 +2179,9 @@ mod_r2 <- tibble(r2 = c(summary(mod1)$r.squared %>% round(3),
                         summary(mod3)$r.squared %>% round(3),
                         summary(mod4)$r.squared %>% round(3)))
 
-m_table <- m2 %>% bind_rows(m3) %>% bind_rows(m4) %>% bind_rows(m1) %>% 
+m_table <- m1 %>% bind_rows(m2) %>% bind_rows(m3) %>% bind_rows(m4) %>% 
   dplyr::select(Variable,`(Intercept)`, `log(PPET)`,
-                clay,`nitrogen`,bedrock,
+                clay,`log(nitrogen)`,bedrock,
                 st_height,LAI) %>% cbind(mod_r2)
 
 write_csv(m_table, file = "models_table.csv")
@@ -1395,12 +2228,12 @@ m7 <- m7 %>%
 
 
 mod_rel_r2 <- tibble(r2 = c(summary(mod5)$r.squared %>% round(3),
-                        summary(mod6)$r.squared %>% round(3),
-                        summary(mod7)$r.squared %>% round(3)))
+                            summary(mod6)$r.squared %>% round(3),
+                            summary(mod7)$r.squared %>% round(3)))
 
 m_rel_table <- m5 %>% bind_rows(m6) %>% bind_rows(m7) %>% 
   dplyr::select(Variable,`(Intercept)`, `log(PPET)`,`log(P_PETsd)`,
-                clay,`nitrogen`,bedrock,
+                clay,`log(nitrogen)`,bedrock,
                 st_height,LAI) %>% cbind(mod_rel_r2)
 
 write_csv(m_rel_table, file = "models_rel_table.csv")
@@ -1416,6 +2249,9 @@ options(bootnsim = 100)
 library(optimx)
 
 neworder <- c("DRY","WOOD","TEMP",'BOR','TROP')
+
+
+## VPD
 
 
 ## VPD
@@ -1449,43 +2285,44 @@ pred_G_log_vpd <-purrr::map(site_names,function(x){
   bind_rows()%>% 
   filter(G_pred > 0) %>% 
   group_by(si_biome) %>% 
-  mutate(max_vpd = max(log_vpd_mean) %>% unique(),
-         log_vpd_mean = - log_vpd_mean) %>%
+  mutate(log_vpd_mean = - log_vpd_mean,
+         max_vpd = max(log_vpd_mean) %>% unique(),
+  ) %>%
   ungroup()
 
-# mod_G_log_vpd <- lmer(G_pred~log_vpd_mean*si_biome+(1|si_code),
-#                           # weights=r2_G_log,
-#                       data = pred_G_log_vpd %>%
-#                             mutate(r2_G_log = case_when(r2_G_log<0~0,
-#                                                         r2_G_log>=0~r2_G_log),
-#                                    si_biome = as.factor(si_biome)),
-#                           REML = TRUE)#,
-#                           # control = lmerControl(optimizer ="Nelder_Mead"))
-# # 
-# 
-# save(mod_G_log_vpd, file="data/spa_model_G_log_vpd.RData")
+mod_G_log_vpd <- lmer(G_pred~log_vpd_mean*si_biome+(1|si_code),
+                      # weights=r2_G_log,
+                      data = pred_G_log_vpd %>%
+                        mutate(r2_G_log = case_when(r2_G_log<0~0,
+                                                    r2_G_log>=0~r2_G_log),
+                               si_biome = as.factor(si_biome)),
+                      REML = TRUE)#,
+# control = lmerControl(optimizer ="Nelder_Mead"))
+#
+
+save(mod_G_log_vpd, file="data/spa_model_G_log_vpd.RData")
 load(file="data/spa_model_G_log_vpd.RData")
 
-# gg2_G_log_vpd <- pred_G_log_vpd %>%
-#   split(.[['si_biome']],drop = FALSE) %>%
-#   purrr::map(function(x){
-#     print(x$si_biome %>% unique())
-#     vpd_sim <- seq(0.3,exp(x$max_vpd) %>% max(),0.05)
-#     vpd_df <- tibble(log_vpd_mean=log(vpd_sim),si_biome = x$si_biome %>% unique())
-#     res <- predict(object = mod_G_log_vpd,
-#                    newdata = vpd_df,
-#                    re.form=NA,
-#                    se.fit=TRUE
-#     )
-#     res2 <- tibble(vpd = vpd_sim ,
-#                   # predi = res,
-#                   predi = res$fit,
-#                   se = res$se.fit,
-#                   si_biome = x$si_biome %>% unique())
-#     return(res2)}) %>% bind_rows()
-# 
-# 
-# save(gg2_G_log_vpd,file="data/gg2_G_log_vpd.RData")
+gg2_G_log_vpd <- pred_G_log_vpd %>%
+  split(.[['si_biome']],drop = FALSE) %>%
+  purrr::map(function(x){
+    print(x$si_biome %>% unique())
+    vpd_sim <- seq(0.3,exp(x$max_vpd) %>% max(),0.05)
+    vpd_df <- tibble(log_vpd_mean=log(vpd_sim),si_biome = x$si_biome %>% unique())
+    res <- predict(object = mod_G_log_vpd,
+                   newdata = vpd_df,
+                   re.form=NA,
+                   se.fit=TRUE
+    )
+    res2 <- tibble(vpd = vpd_sim ,
+                   # predi = res,
+                   predi = res$fit,
+                   se = res$se.fit,
+                   si_biome = x$si_biome %>% unique())
+    return(res2)}) %>% bind_rows()
+
+
+save(gg2_G_log_vpd,file="data/gg2_G_log_vpd.RData")
 load(file="data/gg2_G_log_vpd.RData")
 
 fuu <- arrange(mutate(pred_G_log_vpd,si_biome=factor(si_biome,levels=neworder)),si_biome)
@@ -1556,49 +2393,49 @@ pred_G_log_swc <-purrr::map(site_names,function(x){
          min_swc = min(exp(log_swc)) %>% unique()) %>%
   ungroup()
 
-# mod_G_log_swc <- lmer(G_pred~log_swc*si_biome+(1|si_code),
-#                           # weights=r2_G_log, 
-#                       data = pred_G_log_swc %>% 
-#                             mutate(r2_G_log = case_when(r2_G_log<0~0,
-#                                                             r2_G_log>=0~r2_G_log)),
-#                           REML = TRUE)#, 
-#                           # control = lmerControl(optimizer ="Nelder_Mead"))
-# 
-# 
-# save(mod_G_log_swc,file="data/spa_model_G_log_swc.RData")
-load(file="data/spa_model_G_log_swc.RData")
-# 
-# gg2_G_log_swc <- pred_G_log_swc %>% 
-#   split(.[['si_biome']],drop = FALSE) %>%
-#   purrr::map(function(x){
-#     print(x$si_biome %>% unique())
-#     swc_sim <- seq(x$min_swc %>% min(),x$max_swc %>% max(),0.01)
-#     swc_df <- tibble(log_swc=log(swc_sim),
-#                      # swc = swc_sim,
-#                      si_biome = x$si_biome %>% unique())
-#     res <- predict(object = mod_G_log_swc, 
-#                    newdata = swc_df, 
-#                    re.form=NA,
-#                    se.fit=TRUE)
-#     # merTools::predictInterval(mod_G_log_swc, which="fixed",
-#     #                 newdata = swc_df, n.sims = 10)
-#     res2 <- tibble(swc = swc_sim ,
-#                   predi = res$fit,
-#                   # predi = res,
-#                   se = res$se.fit,
-#                   si_biome = x$si_biome %>% unique())
-#     return(res2)}) %>% bind_rows()
-# 
-# save(gg2_G_log_swc,file="data/gg2_G_log_swc.RData")
+mod_G_log_swc <- lmer(G_pred~log_swc*si_biome+(1|si_code),
+                      # weights=r2_G_log, 
+                      data = pred_G_log_swc %>% 
+                        mutate(r2_G_log = case_when(r2_G_log<0~0,
+                                                    r2_G_log>=0~r2_G_log)),
+                      REML = TRUE)#, 
+# control = lmerControl(optimizer ="Nelder_Mead"))
+
+
+save(mod_G_log_swc,file="data/spa_model_G_log_swc.RData")
+
+
+gg2_G_log_swc <- pred_G_log_swc %>% 
+  split(.[['si_biome']],drop = FALSE) %>%
+  purrr::map(function(x){
+    print(x$si_biome %>% unique())
+    swc_sim <- seq(x$min_swc %>% min(),x$max_swc %>% max(),0.01)
+    swc_df <- tibble(log_swc=log(swc_sim),
+                     # swc = swc_sim,
+                     si_biome = x$si_biome %>% unique())
+    res <- predict(object = mod_G_log_swc, 
+                   newdata = swc_df, 
+                   re.form=NA,
+                   se.fit=TRUE)
+    # merTools::predictInterval(mod_G_log_swc, which="fixed",
+    #                 newdata = swc_df, n.sims = 10)
+    res2 <- tibble(swc = swc_sim ,
+                   predi = res$fit,
+                   # predi = res,
+                   se = res$se.fit,
+                   si_biome = x$si_biome %>% unique())
+    return(res2)}) %>% bind_rows()
+
+save(gg2_G_log_swc,file="data/gg2_G_log_swc.RData")
 load(file="data/gg2_G_log_swc.RData")
 
 fuu <- arrange(mutate(pred_G_log_swc,si_biome=factor(si_biome,levels=neworder)),si_biome)
 gg2_G_log_swc$si_biome <- factor(gg2_G_log_swc$si_biome, 
-                                  levels = c("DRY", 
-                                             "WOOD", 
-                                             "TEMP",
-                                             "BOR",
-                                             "TROP"))
+                                 levels = c("DRY", 
+                                            "WOOD", 
+                                            "TEMP",
+                                            "BOR",
+                                            "TROP"))
 fuu %>% 
   filter(!is.na(si_biome)) %>%
   # group_by(pl_code)%>%
@@ -1657,44 +2494,43 @@ pred_G_log_ppfd <- purrr::map(site_names,function(x){
          min_ppfd = min(exp(log_ppfd)) %>% unique()) %>%
   ungroup()
 
-# mod_G_log_ppfd <- lmer(G_pred~log_ppfd*si_biome+(1|si_code),
-#                            # weights=r2_G_log, 
-#                        data = pred_G_log_ppfd %>% 
-#                              mutate(r2_G_log = case_when(r2_G_log<0~0,
-#                                                              r2_G_log>=0~r2_G_log)),
-#                            REML = TRUE)#, 
-#                            # control = lmerControl(optimizer ="Nelder_Mead"))
-# 
-# 
-# save(mod_G_log_ppfd,file="data/spa_model_G_log_ppfd.RData")
-load(file="data/spa_model_G_log_ppfd.RData")
+mod_G_log_ppfd <- lmer(G_pred~log_ppfd*si_biome+(1|si_code),
+                       # weights=r2_G_log, 
+                       data = pred_G_log_ppfd %>% 
+                         mutate(r2_G_log = case_when(r2_G_log<0~0,
+                                                     r2_G_log>=0~r2_G_log)),
+                       REML = TRUE)#, 
+# control = lmerControl(optimizer ="Nelder_Mead"))
 
-# gg2_G_log_ppfd <- pred_G_log_ppfd %>% 
-#   split(.[['si_biome']],drop = FALSE) %>%
-#   purrr::map(function(x){
-#     print(x$si_biome %>% unique())
-#     ppfd_sim <- seq(x$min_ppfd %>% min(),x$max_ppfd %>% max(),0.02)
-#     ppfd_df <- tibble(log_ppfd = log(ppfd_sim),si_biome = x$si_biome %>% unique())
-#     res <- predict(object = mod_G_log_ppfd, 
-#                    newdata = ppfd_df,re.form=NA,
-#                    se.fit=TRUE)
-#     res2 <- tibble(ppfd = ppfd_sim ,
-#                   predi = res$fit,
-#                   # predi = res,
-#                   se = res$se.fit,
-#                   si_biome = x$si_biome %>% unique())
-#     return(res2)}) %>% bind_rows()
-# 
-# save(gg2_G_log_ppfd,file="data/gg2_G_log_ppfd.RData")
+
+save(mod_G_log_ppfd,file="data/spa_model_G_log_ppfd.RData")
+
+gg2_G_log_ppfd <- pred_G_log_ppfd %>% 
+  split(.[['si_biome']],drop = FALSE) %>%
+  purrr::map(function(x){
+    print(x$si_biome %>% unique())
+    ppfd_sim <- seq(x$min_ppfd %>% min(),x$max_ppfd %>% max(),0.02)
+    ppfd_df <- tibble(log_ppfd = log(ppfd_sim),si_biome = x$si_biome %>% unique())
+    res <- predict(object = mod_G_log_ppfd, 
+                   newdata = ppfd_df,re.form=NA,
+                   se.fit=TRUE)
+    res2 <- tibble(ppfd = ppfd_sim ,
+                   predi = res$fit,
+                   # predi = res,
+                   se = res$se.fit,
+                   si_biome = x$si_biome %>% unique())
+    return(res2)}) %>% bind_rows()
+
+save(gg2_G_log_ppfd,file="data/gg2_G_log_ppfd.RData")
 load(file="data/gg2_G_log_ppfd.RData")
 
 fuu <- arrange(mutate(pred_G_log_ppfd,si_biome=factor(si_biome,levels=neworder)),si_biome)
 gg2_G_log_ppfd$si_biome <- factor(gg2_G_log_ppfd$si_biome, 
-          levels = c("DRY", 
-                     "WOOD", 
-                     "TEMP",
-                     "BOR",
-                     "TROP"))
+                                  levels = c("DRY", 
+                                             "WOOD", 
+                                             "TEMP",
+                                             "BOR",
+                                             "TROP"))
 fuu %>% 
   filter(!is.na(si_biome)) %>%
   group_by(pl_code)%>%
@@ -1712,9 +2548,9 @@ fuu %>%
   facet_wrap(.~si_biome,scales = 'free',nrow = 1)+
   scale_color_manual(values=custom_palette)+
   labs(y="",
-    # y = expression(paste(G[s], " [mol ",m^{-2}, " ", s^{-1},"]" )), 
-    x = expression(paste('PPFD [',"mol ",m^{-2},  " ",s^{-1},"]"))
-       )+
+       # y = expression(paste(G[s], " [mol ",m^{-2}, " ", s^{-1},"]" )), 
+       x = expression(paste('PPFD [',mu,"mol ",m^{-2},  " ",s^{-1},"]"))
+  )+
   guides(color=guide_legend(title="Biome"))+
   scale_alpha_continuous(range = c(0.1, 0.6),
                          guide = 'none'
@@ -1855,28 +2691,29 @@ ggsave(
 
 
 #### VARIABLES --------------------------------------------------------------------
+data_stack_agr <- raster::aggregate(data_stack, fact = 4)
+data_stack_agr$MAP[data_stack_agr$MAP >= 3000]<-3000
 
-data_stack$MAP[data_stack$MAP >= 3000]<-3000
 # MAP <- maps_plot_var(data_stack$MAP,title = "MAP")
 # MAPsd <- maps_plot_var(data_stack$BIO_15,title = "MAPsd")
 # MAT <- maps_plot_var(data_stack$MAT,title = "MAT")
 # MATsd <- maps_plot_var(data_stack$BIO_4,title = "MATsd")
 # PPET <- maps_plot_var(data_stack$PPET,title = "PPET")
-PPET <- maps_plot_var(log(data_stack$PPET),title = "log(PPET)")
-P_PETsd <- maps_plot_var(log(data_stack$P_PETsd),title = "log(P-PETsd)")
-Bedrock <- maps_plot_var(data_stack$bedrock,title = "Bedrock")
-Clay <- maps_plot_var(data_stack$clay,title = "Clay")
+PPET <- maps_plot_var(log(data_stack_agr$PPET),title = "log(PPET)")
+P_PETsd <- maps_plot_var(log(data_stack_agr$P_PETsd),title = "log(P-PETsd)")
+Bedrock <- maps_plot_var(data_stack_agr$bedrock,title = "Bedrock")
+Clay <- maps_plot_var(data_stack_agr$clay,title = "Clay")
 # Sand <- maps_plot_var(data_stack$sand,title = "Sand")
 # pH <- maps_plot_var(data_stack$ph,title = "pH")
-data_stack$nitrogen[data_stack$nitrogen >= 5]<-5
-TotN <- maps_plot_var(data_stack$nitrogen,title = "Total N")
-data_stack$st_height[data_stack$st_height <= 0.5]<-NA
-St_height <- maps_plot_var(data_stack$st_height,title = "Stand height")
-LAI <- maps_plot_var(data_stack$LAI,title = "LAI")
+data_stack_agr$nitrogen[data_stack_agr$nitrogen >= 5]<-5
+TotN <- maps_plot_var(data_stack_agr$nitrogen,title = "Total N")
+data_stack_agr$st_height[data_stack_agr$st_height <= 0.5]<-NA
+St_height <- maps_plot_var(data_stack_agr$st_height,title = "Stand height")
+LAI <- maps_plot_var(data_stack_agr$LAI,title = "LAI")
 gg_maps_var <- plot_grid(PPET,P_PETsd,Clay,TotN,Bedrock,St_height,LAI,ncol = 2)
-# pdf(file ="plots/var_maps.pdf",width=8.5,height=10)
-# gg_maps_var
-# dev.off()
+pdf(file ="plots/var_maps.pdf",width=8.5,height=10)
+gg_maps_var
+dev.off()
 
 ggsave(
   "plots/var_maps.png",
@@ -1904,10 +2741,10 @@ fuu4 <- as.data.frame(map07)$layer
 fuuu <- cbind(vpd=fuu2,swc=fuu3,ppfd=fuu4) %>% as_tibble()
 
 trico <- tricolore::Tricolore(fuuu,p1 = 'vpd', p2 = 'swc', p3 = 'ppfd',
-                            breaks = Inf, contrast = 0.5,lightness = 1,
-                            chroma = 1, spread =1, show_data = FALSE,
-                            show_center = FALSE, label_as = 'pct',
-                            crop = FALSE)
+                              breaks = Inf, contrast = 0.5,lightness = 1,
+                              chroma = 1, spread =1, show_data = FALSE,
+                              show_center = FALSE, label_as = 'pct',
+                              crop = FALSE)
 
 tri <- coordinates(map02) %>% cbind(colortri = trico$rgb) %>%as_tibble()
 tri <- tri %>% mutate(x=as.numeric(x),

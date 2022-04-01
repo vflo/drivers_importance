@@ -276,11 +276,13 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
     
     #plant level filtering
     faa %>%
+        mutate(week = lubridate::week(TIMESTAMP)) %>% 
+        group_by(week,pl_code, si_code,pl_species) %>% 
+        summarise_all(mean,na.rm = TRUE) %>%
         group_by(pl_code) %>% 
         mutate(log_vpd_mean = -log(vpd_mean),
                log_swc = log(swc),
                log_ppfd = log(ppfd/1000),
-               log_ta = log(ta_mean),
                min_swc = min(swc,na.rm = TRUE),
                max_swc = max(swc,na.rm = TRUE),
                range_swc = max_swc - min_swc,
@@ -329,9 +331,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
             model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
                                               (log_ppfd|pl_species)+
                                               (1|pl_species:pl_code),REML = TRUE,data = faa2))
-            model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                              (log_ta|pl_species)+
-                                              (1|pl_species:pl_code),REML = TRUE,data = faa2))
             relgrad <- with(model_G_sw_log@optinfo$derivs,solve(Hessian,gradient))
 
             if(max(abs(relgrad))>0.0001){
@@ -357,9 +356,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
                                        (log_ppfd|pl_species),REML = TRUE,
                                        data = faa2))
-          model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                            (log_ta|pl_species),REML = TRUE,
-                                          data = faa2))
 
         }
         
@@ -379,9 +375,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
              model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
                                           (1|pl_code),REML = TRUE,
                                         data = faa2))
-             model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                               (1|pl_code),REML = TRUE,
-                                             data = faa2))
              }  
   
         if(!test_1 & !test_2){
@@ -392,7 +385,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           model_G_sw_log_vpd <- try(lm(G_sw~log_vpd_mean,data = faa2))
           model_G_sw_log_swc <- try(lm(G_sw~log_swc,data = faa2))
           model_G_sw_log_ppfd <- try(lm(G_sw~log_ppfd,data = faa2))
-          model_G_sw_log_ta <- try(lm(G_sw~log_ta,data = faa2))
 
         } 
 
@@ -428,9 +420,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           r2_G_log_ppfd <- ifelse(class(model_G_sw_log_ppfd) == "try-error", as.numeric("NA"),
                                   model_G_sw_log_ppfd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
           
-          r2_G_log_ta <- ifelse(class(model_G_sw_log_ta) == "try-error", as.numeric("NA"),
-                                  model_G_sw_log_ta %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
-          
           r2_G_log_vpd_mar <- ifelse(class(model_G_sw_log_vpd) == "try-error", as.numeric("NA"),
                                  model_G_sw_log_vpd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
           
@@ -439,21 +428,16 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           
           r2_G_log_ppfd_mar <- ifelse(class(model_G_sw_log_ppfd) == "try-error", as.numeric("NA"),
                                   model_G_sw_log_ppfd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
-          
-          r2_G_log_ta_mar <- ifelse(class(model_G_sw_log_ta) == "try-error", as.numeric("NA"),
-                                      model_G_sw_log_ta %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
 
           df <- tibble(n_days_complete = nrow(faa2),
                        r2_G_log = r2_G_log,
                        r2_G_log_vpd = r2_G_log_vpd,
                        r2_G_log_swc = r2_G_log_swc,
                        r2_G_log_ppfd = r2_G_log_ppfd,
-                       r2_G_log_ta = r2_G_log_ta,
                        r2_G_log_mar = r2_G_log_mar,
                        r2_G_log_vpd_mar = r2_G_log_vpd_mar,
                        r2_G_log_swc_mar = r2_G_log_swc_mar,
                        r2_G_log_ppfd_mar = r2_G_log_ppfd_mar,
-                       r2_G_log_ta_mar = r2_G_log_ta_mar,
                        model_type_complete = type,
                        relat_sum = relat,
                        vpd_rel = vpd_rel,
@@ -473,7 +457,7 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
                       model_G_sw_log
                       )
         
-        save(model,file=paste0(getwd(),"/data/models/complete_G_log/",unique(x2$si_code),".RData"))
+        save(model,file=paste0(getwd(),"/data/models/complete_G_log_weekly/",unique(x2$si_code),".RData"))
       }else{NULL}
       
     }else{NULL}

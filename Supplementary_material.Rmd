@@ -12,20 +12,18 @@ header-includes:
 \normalsize
 \bcenter
 
-![](~/Drivers_importance/plots/AGU_image.png)
-
-
-*Global Biogeochemical Cycles*\par
+*Agricultural and Forest Meteorology*\par
 \par
 Supporting Information for\par
 \par
 **Vapour pressure deficit is the main driver of tree canopy conductance across biomes**\par\par
 
-Víctor Flo$^{1}$, Jordi Martínez-Vilalta$^{1,2}$, Víctor Granda$^{1}$, Maurizio Mencuccini$^{1,3}$, Rafael Poyatos$^{1,2}$\par
+Victor Flo$^{1,2,3}$, Jordi Martínez-Vilalta$^{1,2}$, Víctor Granda$^{1}$, Maurizio Mencuccini$^{1,4}$, Rafael Poyatos$^{1,2}$\par
 \footnotesize
 $^{1}$CREAF, E08193 Bellaterra (Cerdanyola del Vallès), Catalonia, Spain\par
 $^{2}$Univ Autònoma de Barcelona, Cerdanyola del Vallès 08193, Spain\par
-$^{3}$ICREA, Barcelona 08010, Spain\par
+$^{3}$Imperial College London, Department of Life Sciences, Silwood Park Campus, Ascot SL5 7PY, UK\par 
+$^{4}$ICREA, Barcelona 08010, Spain\par
 \par
 \normalsize
 \ecenter
@@ -33,30 +31,47 @@ $^{3}$ICREA, Barcelona 08010, Spain\par
 \par
 **Contents of this file** \par
 
-Figures S1 to S8\par
-Tables S1 to S4 \par
+Figures S1 to S7\par
+Tables S1 to S6 \par
 \par
 
+
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Shaded areas are 95\\% model confidence interval.",fig.cap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Basal area and sapwood area are both in $\\text{cm}^2$. Shaded areas are 95\\% model confidence interval."}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Shaded areas are 95\\% model confidence interval.",fig.cap="SAPFLUXNET global scaling relationship between basal area and sapwood area. Shaded areas are 95\\% model confidence interval."}
 knitr::include_graphics(path = "plots/dbh_sw.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
 
+\newpage
+
+\setlength{\abovecaptionskip}{15pt}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.cap="Scatterplot of daily soil water content (SWC) from SAPFLUXNET and SWC predicted. Predicted values were calculated using a linear mixed model ($\\text{SWC}_{\\text{SAPFLUXNET}}$ = $\\text{SWC}_{\\text{ERA5}}$ + $(\\text{SWC}_{\\text{ERA5}}$|SITE)). The conditional $R^2$ of the model is also presented."}
+knitr::include_graphics(path = "plots/swc_era5.png")
+```
+\setlength{\abovecaptionskip}{0pt}
 
 \newpage
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%',fig.pos="hbt!", fig.align="center", fig.scap="Log relationships of the three environmental variables estimated with the FULL model (VPD + SWC + PPFD) and grouped by biome.",fig.cap="Log relationships of the three environmental variables estimated with the FULL model (VPD + SWC + PPFD) and grouped by biome. Coloured lines are biome-averaged models calculated from LMM predictions with $G_{\\text{Asw}}$ as response variable and the neperian logarithm of the environmental constrains as explanatory variables. Dashed line shows standard error of the average models calculated with bootstrap prediction using 100 simulations."}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="hbt!", fig.align="center", fig.scap="Log relationships of the three environmental variables estimated with the TOTAL model (VPD + SWC + PPFD) and grouped by biome.",fig.cap="Log relationships of the three environmental variables estimated with the FULL model (VPD + SWC + PPFD) and grouped by biome. Coloured lines are biome average models calculated from the models predictions using LMM with $G_{\\text{Asw}}$ as response variable and the neperian logarithm of the environmental constrains as explanatory variables. Dashed line shows standard error of the average models calculated with bootstrap prediction using 100 simulations."}
 knitr::include_graphics(path = "plots/spa_plots.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
 
+
 \newpage
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Comparison of biomes ${R}^2_{{FULL}}$ (VPD + SWC + PPFD), ${R}^2_{{VPD}}$ (VPD), ${R}^2_{{SWC}}$ (SWC) and ${R}^2_{{PPFD}}$ (PPFD) calculated with the four modelling approaches: using linear mixed models on all data, binned data and sampled data and, using GAM models on all data. Dots are mean values for each biome and error bars represent two standard deviations. There were no intra-biome significant differences among models."}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="Relationship and correlation of in site SWC and SWC from ERA5-land.", fig.cap="Comparison of the $R^2$ calculated from the linear mixed models using the all the hierarchical structure of sites and the models with the random strucure simplified. Simplified random structure models only account for intercept parameters at tree level. Linear relationships for each biome and driver importance between the two models aproximations are also shown. Solid and dasshed lines represent significant (p<0.05) and non significant relationships, respectively."}
+knitr::include_graphics(path = "plots/comparative_site_tree.pdf")
+```
+\setlength{\abovecaptionskip}{0pt}
+
+\newpage
+\setlength{\abovecaptionskip}{15pt}
+```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Comparison of biomes $\\text{R}^2_{\\text{VPD, SWC, PPFD}}$ (FULL), $\\text{R}^2_{\\text{VPD}}$ (VPD), $\\text{R}^2_{\\text{SWC}}$ (SWC) and $\\text{R}^2_{\\text{PPFD}}$ (PPFD) calculated with the five modelling approximations: using weighted LMM on all data, binned data, weekly data and sampled data, and using GAM models on all data. Dots are mean values for each biome and error bars represent two standard deviations. Tukey tests of paired differences between aproximations in each biome and driver importance are identified with an astherisc."}
 knitr::include_graphics(path = "plots/comparative.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
+
 
 \newpage
 \setlength{\abovecaptionskip}{15pt}
@@ -66,43 +81,16 @@ knitr::include_graphics(path = "plots/gg_biomes.pdf")
 \setlength{\abovecaptionskip}{0pt}
 
 \newpage
+
 \setlength{\abovecaptionskip}{15pt}
 ```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="Global projection of climatic, soil and stand structure variables.",fig.cap="Global projection of climatic, soil and stand structure variables. log(PPET): logarithm of precipitation over potential evapotraspiration [log(mm $\\text{mm}^{-1}$)]; log($\\text{P-PET}_{\\text{sd}}$): logarithm of the standard deviation of the difference between precipitation and potential evapotranspiration [log(mm)]; Clay: percentage of clay in the soil; Total N: total nitrogen in the soil [g $\\text{kg}^{-1}$];  Bedrock [cm]; Stand height [m]; LAI: leaf area index [$\\text{m}^2$ $\\text{m}^{-2}$]. Total N values above 5 g $\\text{kg}^{-1}$ were truncated."}
-knitr::include_graphics(path = "plots/var_maps.png")
+knitr::include_graphics(path = "plots/var_maps.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
 
 
-\newpage
-\begin{landscape}
-\setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Correlations at the site level between VPD and SWC. R values are Pearson correlations. Different colors indicate the biome. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes."}
-knitr::include_graphics(path = "plots/vpd_swc_cor.pdf")
-```
-\setlength{\abovecaptionskip}{0pt}
-\end{landscape}
 
 \newpage
-\begin{landscape}
-\setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Correlations at the site level between VPD and PPFD. R values are Pearson correlations. Different colors indicate the biome. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes."}
-knitr::include_graphics(path = "plots/vpd_ppfd_cor.pdf")
-```
-\setlength{\abovecaptionskip}{0pt}
-\end{landscape}
-
-\newpage
-\begin{landscape}
-\setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Correlations at the site level between PPFD and SWC. R values are Pearson correlations. Different colors indicate the biome. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes."}
-knitr::include_graphics(path = "plots/swc_ppfd_cor.pdf")
-```
-\setlength{\abovecaptionskip}{0pt}
-\end{landscape}
-
-\newpage
-
-
 ```{r, echo = FALSE, message=FALSE,warning=FALSE}
 
 library(readr)
@@ -119,11 +107,10 @@ table2 <- read_delim("plot_treatment.csv",
 
 
 knitr::kable(table2, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "",
-             digits=2 , align = 'l', caption.short = "SAPFLUXNET stand treatments included in the this study.", caption = "SAPFLUXNET stand treatments included in the this study.")%>%
+             digits=2 , align = 'l', caption.short = "SAPFLUXNET stand treatments included in the this study.", caption = "SAPFLUXNET stand treatments included in the this study (Chapter 3).")%>%
     kableExtra::kable_styling(latex_options = c("HOLD_position"),font_size = 12)
 ```
 \newpage
-
 
 ```{r, echo = FALSE, message=FALSE,warning=FALSE}
 
@@ -136,9 +123,8 @@ library(kableExtra)
 #     trim_ws = TRUE)#be careful now is sep"," change it if you prefer
 
 table1 <- read_delim("resume_table.csv",
-    "\t", escape_double = FALSE, 
+    ",", escape_double = FALSE, 
     trim_ws = TRUE)
-
 table1 <- table1 %>% 
   # mutate (si_code = gsub("_","\_",si_code)) %>% 
   dplyr::rename(`Site code`=si_code,
@@ -151,9 +137,38 @@ table1 <- table1 %>%
                 )
 
 knitr::kable(table1, "latex", booktabs = TRUE, escape = FALSE, longtable = TRUE, linesep = "",
-             digits=2 , align = 'c', caption.short = "SAPFLUXNET sites included in the study.", caption = "SAPFLUXNET sites included in the study. Biome was estimated using a Whittaker diagram. *Indicates that the biome was manually adjusted and confirmed by SAPFLUXNET contributors.")%>%
+             digits=2 , align = 'c', caption.short = "SAPFLUXNET sites included in the study.", caption = "SAPFLUXNET sites included in the study. Biome was calculated using Whittaker diagram. *Indicates that the biome was manually adjusted and confirmed by SAPFLUXNET contributors.")%>%
     kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 8)
 ```
+\newpage
+
+
+<!-- \newgeometry{layout=a4paper,left=1in,right=0.2in,top=0.2in,bottom=0.2in,nohead} -->
+\begin{landscape}
+```{r, echo = FALSE, message=FALSE,warning=FALSE}
+
+library(readr)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+# table1 <- read_delim("data/appendixA/tableS1.csv",
+#     ",", escape_double = FALSE, col_types = cols(X1 = col_skip()),
+#     trim_ws = TRUE)#be careful now is sep"," change it if you prefer
+
+table3 <- read_delim("resume_table2.csv",
+    ",", escape_double = FALSE, 
+    trim_ws = TRUE)
+
+
+knitr::kable(table3, "latex", booktabs = TRUE, escape = FALSE, longtable = TRUE, linesep = "",
+             digits=2 , align = 'c', caption.short = "Summary table of plot level.", caption = "Summary table of site level $\\text{R}^2_{\\text{VPD}}$, $\\text{R}^2_{\\text{SWC}}$, $\\text{R}^2_{\\text{PPFD}}$, climate, soil properties and vegetation structure data. PPET is in [mm $\\text{mm}^{-1}$], $\\text{P-PET}_{\\text{sd}}$ is in [mm], Clay and Sand are in [\\%], Total N is in [g $\\text{kg}^{-1}$], Stand height is in [m], LAI is in [$\\text{m}^2_{\\text{leaves}}\\;\\text{m}^2_{\\text{soil}}$]. Letters show data source: a = SAPFLUXNET, b = Global rasters, c = SAPFLUXNET plant height.")%>%
+    kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 6) %>% 
+  row_spec(0, angle = 45) %>% 
+  column_spec(c(2:14), width = "3.5em")%>% 
+  column_spec(c(1), width = "8em")
+```
+\end{landscape}
+<!-- \restoregeometry -->
 \newpage
 
 
@@ -176,9 +191,38 @@ knitr::kable(table4, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE
              digits=2 , align = c('l','c'), caption.short = "Table of equivalence between Whittaker biomes and the groups of biomes used in the study.", caption = "Table of equivalence between Whittaker biomes and the groups of biomes used in the study.")%>%
     kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 12)
 ```
-\newpage
+<!-- \newpage -->
+<!-- \begin{landscape} -->
+<!-- ```{r, echo = FALSE, message=FALSE,warning=FALSE} -->
 
-<!-- \newgeometry{layout=a4paper,left=1in,right=0.2in,top=0.2in,bottom=0.2in,nohead} -->
+<!-- library(readr) -->
+<!-- library(tidyverse) -->
+<!-- library(knitr) -->
+<!-- library(kableExtra) -->
+<!-- # table1 <- read_delim("data/appendixA/tableS1.csv", -->
+<!-- #     ",", escape_double = FALSE, col_types = cols(X1 = col_skip()), -->
+<!-- #     trim_ws = TRUE)#be careful now is sep"," change it if you prefer -->
+
+<!-- table5 <- read_csv("comparison_biome_tree.csv")%>% -->
+<!--   dplyr::rename( -->
+<!--     `$R^2_{VPD}$` = vpd_tree_alone, -->
+<!--     `$R^2_{SWC}$` = swc_tree_alone, -->
+<!--     `$R^2_{PPFD}$` = ppfd_tree_alone, -->
+<!--     `$R^2_{FULL}$` = complete_tree_alone, -->
+<!--     `$R^2_{VPD}$ - $R^2_{SWC}$` = vpd_swc_tree, -->
+<!--     `$R^2_{VPD}$ - $R^2_{PPFD}$` = vpd_ppfd_tree, -->
+<!--     `$R^2_{SWC}$ - $R^2_{PPFD}$` = swc_ppfd_tree -->
+
+<!--          ) -->
+
+
+<!-- knitr::kable(table5, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "", -->
+<!--              digits=2 , align = c('l','c'), caption = "Analysis of variance testing differences among biomes in the site average driver importance ($R^2$’s) from simple linear models of tree-level water conductance ($G_{\\text{Asw}}$) to each of the main hydrometeorological drivers: vapour pressure deficit ($\\text{R}^2_{\\text{VPD}}$), soil water content ($\\text{R}^2_{\\text{SWC}}$), radiation ($\\text{R}^2_{\\text{PPFD}}$) and the complete model including all drivers ($\\text{R}^2_{\\text{FULL}}$). The table shows the mean coupling obtained across all sites in each biome. We also show the means of the paired differences between individual hydrometeorological couplings and the corresponding statistical significance. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes. Different superscript letters indicate significant (p < 0.05) Tukey tests of paired differences between biomes. Asterisks indicate statistically significant differences from zero for the paired differences between hydrometeorological couplings.")%>% -->
+<!--     kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 12) -->
+<!-- ``` -->
+<!-- \end{landscape} -->
+
+\newpage
 \begin{landscape}
 ```{r, echo = FALSE, message=FALSE,warning=FALSE}
 
@@ -190,21 +234,57 @@ library(kableExtra)
 #     ",", escape_double = FALSE, col_types = cols(X1 = col_skip()),
 #     trim_ws = TRUE)#be careful now is sep"," change it if you prefer
 
-table3 <- read_delim("resume_table2.csv",
-    "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
+table8 <- read_csv("comparison_biome_subset.csv")%>%
+  dplyr::rename(`Biome and SWC source` = Biome,
+    `$R^2_{VPD}$` = vpd_swcsfn_alone,
+    `$R^2_{SWC}$` = swc_swcsfn_alone,
+    `$R^2_{PPFD}$` = ppfd_swcsfn_alone,
+    `$R^2_{FULL}$` = complete_swcsfn_alone,
+    `$R^2_{VPD}$ - $R^2_{SWC}$` = vpd_swc_swcsfn,
+    `$R^2_{VPD}$ - $R^2_{PPFD}$` = vpd_ppfd_swcsfn,
+    `$R^2_{SWC}$ - $R^2_{PPFD}$` = swc_ppfd_swcsfn
+
+         ) %>% 
+  cbind(N = c(4,4, 17,17,38,38,4,4,4,4 ))
 
 
-knitr::kable(table3, "latex", booktabs = TRUE, escape = FALSE, longtable = TRUE, linesep = "",
-             digits=2 , align = 'c', caption.short = "Summary table of plot level.", caption = "Summary table of site level $\\text{R}^2_{\\text{VPD}}$, $\\text{R}^2_{\\text{SWC}}$, $\\text{R}^2_{\\text{PPFD}}$, climate, soil properties and vegetation structure data. PPET is in [mm $\\text{mm}^{-1}$], $\\text{P-PET}_{\\text{sd}}$ is in [mm], Clay and Sand are in [\\%], Total N is in [g $\\text{kg}^{-1}$], Stand height is in [m], LAI is in [$\\text{m}^2_{\\text{leaves}}\\;\\text{m}^2_{\\text{soil}}$]. Letters show data source: a = SAPFLUXNET, b = Global rasters, c = SAPFLUXNET plant height.")%>%
-    kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 6) %>% 
-  row_spec(0, angle = 45) %>% 
-  column_spec(c(2:14), width = "3.5em")%>% 
-  column_spec(c(1), width = "9em")
+knitr::kable(table8, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "",
+             digits=2 , align = c('l','c'), caption = "Analysis of variance testing differences among biomes in hydrometeorological drivers importance ($R^2$’s) using soil water content from in site measurements and from ERA5. The table shows the mean importance in each combination of Biome and soil water content source (i.e. SAPFLUXNET (SFN) or ERA5-land (ERA5)) obtained across a subset of sites were soil water content is present in SAPFLUXNET. We also show the means of the paired differences between the importance of individual hydrometeorological drivers and the corresponding statistical significance. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes. Different superscript letters indicate significant (p < 0.05) Tukey tests of paired differences between biomes. Asterisks indicate statistically significant differences from zero for the paired differences between hydrometeorological drivers importance.")%>%
+    kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 11)
 ```
 \end{landscape}
-<!-- \restoregeometry -->
 
+\newpage
+\begin{landscape}
+```{r, echo = FALSE, message=FALSE,warning=FALSE}
+
+library(readr)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+# table1 <- read_delim("data/appendixA/tableS1.csv",
+#     ",", escape_double = FALSE, col_types = cols(X1 = col_skip()),
+#     trim_ws = TRUE)#be careful now is sep"," change it if you prefer
+
+table6 <- read_csv("models_rel_table.csv") %>%
+  dplyr::rename(
+    Intercept = `(Intercept)`,
+    `$R^2$` = r2,
+    `log(P-PETsd)` = `log(P_PETsd)`,
+    `Stand Height` = st_height,
+    `log(Total Nitrogen)`= `log(nitrogen)`,
+    `Bedrock depth` = bedrock,
+    `Clay percentage` = clay
+         )
+
+
+knitr::kable(table6, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "",
+             digits=3 , align = c('l','c'), caption = "Parameters of the models explaining partial $R^2$ of VPD, SWC, PPFD from the FULL model as a function of climatic, soil and stand structure variables used to calculate Fig. 3 projection on the mail text. log(PPET): logarithm of precipitation over potential evapotranspiration [log($\\text{mm}$ $\\text{mm}^{-1})^{-1}$]; log(P-PETsd): logarithm of the standard deviation of the difference between precipitation and potential evapotranspiration [log($\\text{mm})^{-1}$]; Clay percentage [$\\%^{-1}_{\\text{clay}}$]; Total Nitrogen [log(($\\text{Kg}$ $\\text{g}^{-1})^{-1})$];Bedrock depth [$\\text{cm}^{-1}$]; Stand Height [$\\text{m}^{-1}$]; LAI: leaf area index [($\\text{m}^{2}$ $\\text{m}^{-2})^{-1}$]. NI means that the variable was not included in the model after model selection. The $R^{2}$ of each multiple regression is also shown.")%>%
+    kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 10)
+```
+\end{landscape}
+
+<!-- \newpage -->
 
 <!-- ```{r, echo = FALSE, message=FALSE,warning=FALSE} -->
 

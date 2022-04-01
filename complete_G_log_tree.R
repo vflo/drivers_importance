@@ -280,7 +280,6 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
         mutate(log_vpd_mean = -log(vpd_mean),
                log_swc = log(swc),
                log_ppfd = log(ppfd/1000),
-               log_ta = log(ta_mean),
                min_swc = min(swc,na.rm = TRUE),
                max_swc = max(swc,na.rm = TRUE),
                range_swc = max_swc - min_swc,
@@ -302,111 +301,15 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           n_distinct(faa2$ppfd) >= 9,
           max(faa2$max_ppfd) >= 400)){
 
-        test_1 <- unique(faa2$pl_species) %>% length()>1
-        test_2 <- faa2 %>% 
-          group_by(pl_species) %>% 
-          summarise(n_dis = n_distinct(pl_code)) %>%
-          mutate(logi=any(n_dis > 1)) %>%
-          dplyr::select(logi) %>% 
-          unique() %>% 
-          as.logical()
+      faa2 %>% 
+        split(.$pl_code) %>% 
+        purrr::map(function(z){
+          model_G_sw_log <- try(lm(G_sw~log_vpd_mean+log_swc+log_ppfd,data = z))
+          model_G_sw_log_vpd <- try(lm(G_sw~log_vpd_mean,data = z))
+          model_G_sw_log_swc <- try(lm(G_sw~log_swc,data = z))
+          model_G_sw_log_ppfd <- try(lm(G_sw~log_ppfd,data = z))
 
-        
-        if(test_1 & test_2){
-
-          type = 1
-
-            model_G_sw_log <- try(lmer(G_sw~log_vpd_mean+log_swc+log_ppfd+
-                                         (-1+log_vpd_mean+log_swc+log_ppfd|pl_species)+
-                                         (1|pl_species:pl_code),REML = TRUE,
-                                       data = faa2))
-            model_G_sw_log_vpd <- try(lmer(G_sw~log_vpd_mean+
-                                             (log_vpd_mean|pl_species)+
-                                             (1|pl_species:pl_code),REML = TRUE,data = faa2))
-            model_G_sw_log_swc <- try(lmer(G_sw~log_swc+
-                                             (log_swc|pl_species)+
-                                             (1|pl_species:pl_code),REML = TRUE,data = faa2))
-            model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
-                                              (log_ppfd|pl_species)+
-                                              (1|pl_species:pl_code),REML = TRUE,data = faa2))
-            model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                              (log_ta|pl_species)+
-                                              (1|pl_species:pl_code),REML = TRUE,data = faa2))
-            relgrad <- with(model_G_sw_log@optinfo$derivs,solve(Hessian,gradient))
-
-            if(max(abs(relgrad))>0.0001){
-              test_1 <- FALSE
-              test_2 <- TRUE}
-
-      }
-
-        
-        if(test_1 & !test_2){
-          
-          type = 2
-
-          model_G_sw_log <- try(lmer(G_sw~log_vpd_mean+log_swc+log_ppfd+
-                                       (log_vpd_mean+log_swc+log_ppfd|pl_species),REML = TRUE,
-                                     data = faa2))
-          model_G_sw_log_vpd <- try(lmer(G_sw~log_vpd_mean+
-                                       (log_vpd_mean|pl_species),REML = TRUE,
-                                       data = faa2))
-          model_G_sw_log_swc <- try(lmer(G_sw~log_swc+
-                                       (log_swc|pl_species),REML = TRUE,
-                                       data = faa2))
-          model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
-                                       (log_ppfd|pl_species),REML = TRUE,
-                                       data = faa2))
-          model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                            (log_ta|pl_species),REML = TRUE,
-                                          data = faa2))
-
-        }
-        
-        if(!test_1 & test_2){
-
-           type = 3
-
-             model_G_sw_log <- try(lmer(G_sw~log_vpd_mean+log_swc+log_ppfd+
-                                          (1|pl_code),REML = TRUE,
-                                        data = faa2))
-             model_G_sw_log_vpd <- try(lmer(G_sw~log_vpd_mean+
-                                          (1|pl_code),REML = TRUE,
-                                        data = faa2))
-             model_G_sw_log_swc <- try(lmer(G_sw~log_swc+
-                                          (1|pl_code),REML = TRUE,
-                                        data = faa2))
-             model_G_sw_log_ppfd <- try(lmer(G_sw~log_ppfd+
-                                          (1|pl_code),REML = TRUE,
-                                        data = faa2))
-             model_G_sw_log_ta <- try(lmer(G_sw~log_ta+
-                                               (1|pl_code),REML = TRUE,
-                                             data = faa2))
-             }  
-  
-        if(!test_1 & !test_2){
-
-          type = 4
-
-          model_G_sw_log <- try(lm(G_sw~log_vpd_mean+log_swc+log_ppfd,data = faa2))
-          model_G_sw_log_vpd <- try(lm(G_sw~log_vpd_mean,data = faa2))
-          model_G_sw_log_swc <- try(lm(G_sw~log_swc,data = faa2))
-          model_G_sw_log_ppfd <- try(lm(G_sw~log_ppfd,data = faa2))
-          model_G_sw_log_ta <- try(lm(G_sw~log_ta,data = faa2))
-
-        } 
-
-        # partR2(model_G_sw_log,
-        #        partvars = c("log_vpd_mean", "log_swc", "log_ppfd"),
-        #        R2_type = "conditional", nboot = 100, CI = 0.95,
-        #        data = faa2)
-        # r2glmm::r2beta(model_G_sw_log,method="nsj")
-
-          r2_G_log <- ifelse(class(model_G_sw_log) == "try-error", as.numeric("NA"),
-                             model_G_sw_log %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
-          
-          r2_G_log_mar <- ifelse(class(model_G_sw_log) == "try-error", as.numeric("NA"),
-                             model_G_sw_log %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
+          r2_G_log <- summary(model_G_sw_log)['r.squared']
 
           rel_r2 <- r2glmm::r2beta(model_G_sw_log, method="nsj")
           rel_r2 <- rel_r2 %>% as_tibble() %>% dplyr::select(Effect,Rsq)
@@ -419,61 +322,35 @@ furrr::future_map(site_names,.progress=TRUE, .f=function(.x){
           swc_rel <- swc_rel/relat
           ppfd_rel <- ppfd_rel/relat
 
-          r2_G_log_vpd <- ifelse(class(model_G_sw_log_vpd) == "try-error", as.numeric("NA"),
-                                 model_G_sw_log_vpd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
+          r2_G_log_vpd <- summary(model_G_sw_log_vpd)['r.squared']
+          r2_G_log_swc <- summary(model_G_sw_log_swc)['r.squared']
+          r2_G_log_ppfd <- summary(model_G_sw_log_ppfd)['r.squared']
 
-          r2_G_log_swc <- ifelse(class(model_G_sw_log_swc) == "try-error", as.numeric("NA"),
-                                 model_G_sw_log_swc %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
-
-          r2_G_log_ppfd <- ifelse(class(model_G_sw_log_ppfd) == "try-error", as.numeric("NA"),
-                                  model_G_sw_log_ppfd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
-          
-          r2_G_log_ta <- ifelse(class(model_G_sw_log_ta) == "try-error", as.numeric("NA"),
-                                  model_G_sw_log_ta %>% MuMIn::r.squaredGLMM() %>% .[1,"R2c"])
-          
-          r2_G_log_vpd_mar <- ifelse(class(model_G_sw_log_vpd) == "try-error", as.numeric("NA"),
-                                 model_G_sw_log_vpd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
-          
-          r2_G_log_swc_mar <- ifelse(class(model_G_sw_log_swc) == "try-error", as.numeric("NA"),
-                                 model_G_sw_log_swc %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
-          
-          r2_G_log_ppfd_mar <- ifelse(class(model_G_sw_log_ppfd) == "try-error", as.numeric("NA"),
-                                  model_G_sw_log_ppfd %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
-          
-          r2_G_log_ta_mar <- ifelse(class(model_G_sw_log_ta) == "try-error", as.numeric("NA"),
-                                      model_G_sw_log_ta %>% MuMIn::r.squaredGLMM() %>% .[1,"R2m"])
-
-          df <- tibble(n_days_complete = nrow(faa2),
-                       r2_G_log = r2_G_log,
-                       r2_G_log_vpd = r2_G_log_vpd,
-                       r2_G_log_swc = r2_G_log_swc,
-                       r2_G_log_ppfd = r2_G_log_ppfd,
-                       r2_G_log_ta = r2_G_log_ta,
-                       r2_G_log_mar = r2_G_log_mar,
-                       r2_G_log_vpd_mar = r2_G_log_vpd_mar,
-                       r2_G_log_swc_mar = r2_G_log_swc_mar,
-                       r2_G_log_ppfd_mar = r2_G_log_ppfd_mar,
-                       r2_G_log_ta_mar = r2_G_log_ta_mar,
-                       model_type_complete = type,
+          df <- tibble(si_code = x2$si_code %>% unique(),
+                       pl_code = z$pl_code %>% unique(),
+                       n_days_complete = nrow(faa2),
+                       r2_G_log = r2_G_log$r.squared,
+                       r2_G_log_vpd = r2_G_log_vpd$r.squared,
+                       r2_G_log_swc = r2_G_log_swc$r.squared,
+                       r2_G_log_ppfd = r2_G_log_ppfd$r.squared,
                        relat_sum = relat,
                        vpd_rel = vpd_rel,
                        swc_rel = swc_rel,
                        ppfd_rel = ppfd_rel)
-# 
-#         return(df)
-#           
-#         }) %>% bind_rows() -> df_res
+
+        return(df)
+
+        }) %>% bind_rows() -> df_res
 
         
         print(unique(x2$si_code))
         
-        model <- list(df, 
+        model <- list(df_res, 
                       env_data,
-                      faa2,
-                      model_G_sw_log
+                      faa2
                       )
         
-        save(model,file=paste0(getwd(),"/data/models/complete_G_log/",unique(x2$si_code),".RData"))
+        save(model,file=paste0(getwd(),"/data/models/complete_G_log_tree/",unique(x2$si_code),".RData"))
       }else{NULL}
       
     }else{NULL}
