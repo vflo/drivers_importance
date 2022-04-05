@@ -52,7 +52,7 @@ knitr::include_graphics(path = "plots/swc_era5.png")
 
 \newpage
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%',fig.pos="hbt!", fig.align="center", fig.scap="Log relationships of the three environmental variables estimated with the TOTAL model (VPD + SWC + PPFD) and grouped by biome.",fig.cap="Log relationships of the three environmental variables estimated with the FULL model (VPD + SWC + PPFD) and grouped by biome. Coloured lines are biome average models calculated from the models predictions using LMM with $G_{\\text{Asw}}$ as response variable and the neperian logarithm of the environmental constrains as explanatory variables. Dashed line shows standard error of the average models calculated with bootstrap prediction using 100 simulations."}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="hbt!", fig.align="center", fig.scap="Log relationships of the three environmental variables estimated with the TOTAL model (VPD + SWC + PPFD) and grouped by biome.",fig.cap="Log relationships of the three environmental variables estimated with the FULL model (VPD + SWC + PPFD) and grouped by biome. Coloured lines are biome average models calculated from the models predictions using LMM with $G$ as response variable and the neperian logarithm of the environmental constrains as explanatory variables. Dashed line shows standard error of the average models calculated with bootstrap prediction using 100 simulations."}
 knitr::include_graphics(path = "plots/spa_plots.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
@@ -60,14 +60,14 @@ knitr::include_graphics(path = "plots/spa_plots.pdf")
 
 \newpage
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="Relationship and correlation of in site SWC and SWC from ERA5-land.", fig.cap="Comparison of the $R^2$ calculated from the linear mixed models using the all the hierarchical structure of sites and the models with the random strucure simplified. Simplified random structure models only account for intercept parameters at tree level. Linear relationships for each biome and driver importance between the two models aproximations are also shown. Solid and dasshed lines represent significant (p<0.05) and non significant relationships, respectively."}
+```{r , echo=FALSE,  out.width = '100%',fig.pos="H", fig.align="center", fig.scap="Relationship and correlation of in site SWC and SWC from ERA5-land.", fig.cap="Comparison of the $R^2$ calculated from the linear mixed models using all the hierarchical structure of sites and the models with a common simplidied random strucure. Simplified random structure models only account for intercept parameters at tree level. Linear relationships for each biome and driver importance between the two models aproximations are also shown. Solid and dasshed lines represent significant (p<0.05) and non significant relationships, respectively."}
 knitr::include_graphics(path = "plots/comparative_site_tree.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
 
 \newpage
 \setlength{\abovecaptionskip}{15pt}
-```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Comparison of biomes $\\text{R}^2_{\\text{VPD, SWC, PPFD}}$ (FULL), $\\text{R}^2_{\\text{VPD}}$ (VPD), $\\text{R}^2_{\\text{SWC}}$ (SWC) and $\\text{R}^2_{\\text{PPFD}}$ (PPFD) calculated with the five modelling approximations: using weighted LMM on all data, binned data, weekly data and sampled data, and using GAM models on all data. Dots are mean values for each biome and error bars represent two standard deviations. Tukey tests of paired differences between aproximations in each biome and driver importance are identified with an astherisc."}
+```{r , echo=FALSE,  out.width = '100%', fig.pos="hbt!", fig.align="center", fig.cap="Comparison of biomes $R^2_{\\text{VPD, SWC, PPFD}}$ (FULL), $R^2_{\\text{VPD}}$ (VPD), $R^2_{\\text{SWC}}$ (SWC) and $R^2_{\\text{PPFD}}$ (PPFD) calculated with the five modelling approximations: using weighted LMM on all data, binned data, weekly data and sampled data, and using GAM models on all data. Dots are mean values for each biome and error bars represent two standard deviations. Tukey tests of paired differences between aproximations in each biome and driver importance are identified with an astherisc."}
 knitr::include_graphics(path = "plots/comparative.pdf")
 ```
 \setlength{\abovecaptionskip}{0pt}
@@ -107,7 +107,7 @@ table2 <- read_delim("plot_treatment.csv",
 
 
 knitr::kable(table2, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "",
-             digits=2 , align = 'l', caption.short = "SAPFLUXNET stand treatments included in the this study.", caption = "SAPFLUXNET stand treatments included in the this study (Chapter 3).")%>%
+             digits=2 , align = 'l', caption.short = "SAPFLUXNET stand treatments included in the this study.", caption = "SAPFLUXNET stand treatments included in the this study.")%>%
     kableExtra::kable_styling(latex_options = c("HOLD_position"),font_size = 12)
 ```
 \newpage
@@ -161,7 +161,7 @@ table3 <- read_delim("resume_table2.csv",
 
 
 knitr::kable(table3, "latex", booktabs = TRUE, escape = FALSE, longtable = TRUE, linesep = "",
-             digits=2 , align = 'c', caption.short = "Summary table of plot level.", caption = "Summary table of site level $\\text{R}^2_{\\text{VPD}}$, $\\text{R}^2_{\\text{SWC}}$, $\\text{R}^2_{\\text{PPFD}}$, climate, soil properties and vegetation structure data. PPET is in [mm $\\text{mm}^{-1}$], $\\text{P-PET}_{\\text{sd}}$ is in [mm], Clay and Sand are in [\\%], Total N is in [g $\\text{kg}^{-1}$], Stand height is in [m], LAI is in [$\\text{m}^2_{\\text{leaves}}\\;\\text{m}^2_{\\text{soil}}$]. Letters show data source: a = SAPFLUXNET, b = Global rasters, c = SAPFLUXNET plant height.")%>%
+             digits=2 , align = 'c', caption.short = "Summary table of plot level.", caption = "Summary table of site level $R^2_{\\text{VPD}}$, $R^2_{\\text{SWC}}$, $R^2_{\\text{PPFD}}$, climate, soil properties and vegetation structure data. PPET is in [mm $\\text{mm}^{-1}$], $\\text{P-PET}_{\\text{sd}}$ is in [mm], Clay and Sand are in [\\%], Total N is in [g $\\text{kg}^{-1}$], Stand height is in [m], LAI is in [$\\text{m}^2_{\\text{leaves}}\\;\\text{m}^2_{\\text{soil}}$]. Letters show data source: a = SAPFLUXNET, b = Global rasters, c = SAPFLUXNET plant height.")%>%
     kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 6) %>% 
   row_spec(0, angle = 45) %>% 
   column_spec(c(2:14), width = "3.5em")%>% 
@@ -217,7 +217,7 @@ knitr::kable(table4, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE
 
 
 <!-- knitr::kable(table5, "latex", booktabs = TRUE, escape = FALSE, longtable = FALSE, linesep = "", -->
-<!--              digits=2 , align = c('l','c'), caption = "Analysis of variance testing differences among biomes in the site average driver importance ($R^2$’s) from simple linear models of tree-level water conductance ($G_{\\text{Asw}}$) to each of the main hydrometeorological drivers: vapour pressure deficit ($\\text{R}^2_{\\text{VPD}}$), soil water content ($\\text{R}^2_{\\text{SWC}}$), radiation ($\\text{R}^2_{\\text{PPFD}}$) and the complete model including all drivers ($\\text{R}^2_{\\text{FULL}}$). The table shows the mean coupling obtained across all sites in each biome. We also show the means of the paired differences between individual hydrometeorological couplings and the corresponding statistical significance. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes. Different superscript letters indicate significant (p < 0.05) Tukey tests of paired differences between biomes. Asterisks indicate statistically significant differences from zero for the paired differences between hydrometeorological couplings.")%>% -->
+<!--              digits=2 , align = c('l','c'), caption = "Analysis of variance testing differences among biomes in the site average driver importance ($R^2$’s) from simple linear models of tree-level water conductance ($G$) to each of the main hydrometeorological drivers: vapour pressure deficit ($\\text{R}^2_{\\text{VPD}}$), soil water content ($\\text{R}^2_{\\text{SWC}}$), radiation ($\\text{R}^2_{\\text{PPFD}}$) and the complete model including all drivers ($\\text{R}^2_{\\text{FULL}}$). The table shows the mean coupling obtained across all sites in each biome. We also show the means of the paired differences between individual hydrometeorological couplings and the corresponding statistical significance. DRY: dry and desert biomes; WOOD: woodlands and shrublands; TEMP: temperate biomes; BOR: boreal and tundra; TROP: tropical and subtropical biomes. Different superscript letters indicate significant (p < 0.05) Tukey tests of paired differences between biomes. Asterisks indicate statistically significant differences from zero for the paired differences between hydrometeorological couplings.")%>% -->
 <!--     kableExtra::kable_styling(latex_options = c("repeat_header"),font_size = 12) -->
 <!-- ``` -->
 <!-- \end{landscape} -->
